@@ -3,8 +3,9 @@
 import React from "react"
 
 import { Button } from "@/components/ui/button"
-import { MessageCircle, Calendar } from "lucide-react"
+import { MessageCircle, Calendar, CheckCircle2, Clock } from "lucide-react"
 import { trackWhatsAppLead } from "@/lib/whatsapp"
+import { siteConfig } from "@/lib/site-config"
 
 export function CTASchedulingSection() {
   const whatsappNumber = "5511995625889"
@@ -22,6 +23,15 @@ export function CTASchedulingSection() {
     <section className="py-20 bg-gradient-to-br from-secondary/30 to-secondary/10">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="max-w-3xl mx-auto text-center">
+          {siteConfig.offer.enabled && (
+            <div className="flex justify-center mb-5">
+              <span className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2 text-accent-foreground font-semibold shadow-md text-sm md:text-base">
+                <CheckCircle2 className="h-5 w-5 shrink-0" />
+                {siteConfig.offer.label}
+              </span>
+            </div>
+          )}
+
           <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-6 text-balance">
             Dê o Próximo Passo Para Sair da Dor
           </h2>
@@ -59,6 +69,13 @@ export function CTASchedulingSection() {
                 Agendar Avaliação
               </Button>
             </div>
+
+            {siteConfig.urgency.enabled && (
+              <p className="mt-5 inline-flex items-center justify-center gap-2 text-sm font-medium text-primary">
+                <Clock className="h-4 w-4 shrink-0" />
+                {siteConfig.urgency.text}
+              </p>
+            )}
           </div>
 
           <p className="text-sm text-muted-foreground text-pretty">

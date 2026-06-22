@@ -1,6 +1,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { Facebook, Instagram } from "lucide-react"
+import { WhatsAppCtaButton } from "@/components/whatsapp-cta-button"
 
 export function Header() {
   return (
@@ -38,13 +39,13 @@ export function Header() {
             </Link>
           </nav>
 
-          {/* Social Icons - Updated with real social media links */}
+          {/* CTA + Social Icons */}
           <div className="flex items-center gap-4">
             <Link
               href="https://www.facebook.com/beneventofisioterapia"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-primary transition-colors"
+              className="hidden sm:block text-muted-foreground hover:text-primary transition-colors"
               aria-label="Facebook"
             >
               <Facebook className="h-5 w-5" />
@@ -53,11 +54,17 @@ export function Header() {
               href="https://instagram.com/licemarabenevento"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-primary transition-colors"
+              className="hidden sm:block text-muted-foreground hover:text-primary transition-colors"
               aria-label="Instagram"
             >
               <Instagram className="h-5 w-5" />
             </Link>
+            <WhatsAppCtaButton
+              message="Ola! Vim pelo site e gostaria de agendar uma avaliacao para dor nas costas."
+              label="Agendar"
+              gtm="cta-whatsapp-header"
+              size="sm"
+            />
           </div>
         </div>
       </div>
