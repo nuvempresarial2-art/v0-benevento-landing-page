@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Analytics } from "@vercel/analytics/next"
 import Script from "next/script"
+import { FloatingWhatsApp } from "@/components/floating-whatsapp"
 import "./globals.css"
 
 export const metadata: Metadata = {
@@ -93,6 +94,7 @@ export default function RootLayout({
           />
         </noscript>
         {children}
+        <FloatingWhatsApp />
         <Analytics />
       </body>
     </html>
