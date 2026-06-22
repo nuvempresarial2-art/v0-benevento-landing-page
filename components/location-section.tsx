@@ -1,3 +1,5 @@
+import { MapEmbed } from "@/components/map-embed"
+
 export function LocationSection() {
   const address = "R. Antonio Feres Sada, 23 - Centro, Varzea Paulista - SP, 13220-020"
   const mapsUrl = "https://www.google.com/maps/place/R.+Ant%C3%B4nio+Feres+Sada,+23+-+Centro,+V%C3%A1rzea+Paulista+-+SP,+13220-020"
@@ -16,17 +18,11 @@ export function LocationSection() {
           </div>
 
           <div className="rounded-2xl overflow-hidden shadow-lg border border-border bg-card">
-            {/* Google Maps Embed */}
+            {/* Google Maps Embed (carregado sob demanda para nao pesar no mobile) */}
             <div className="w-full h-72 md:h-96">
-              <iframe
+              <MapEmbed
                 title="Localizacao Benevento Fisioterapia"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3670.123456789!2d-47.0076!3d-23.2116!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zUi4gQW50w7RuaW8gRmVyZXMgU2FkYSwgMjMgLSBDZW50cm8sIFbDoXJ6ZWEgUGF1bGlzdGEgLSBTUCwgMTMyMjAtMDIw!5e0!3m2!1spt-BR!2sbr!4v1234567890"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
               />
             </div>
 
