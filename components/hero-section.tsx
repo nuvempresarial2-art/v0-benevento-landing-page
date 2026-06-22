@@ -4,10 +4,11 @@ import React from "react"
 
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { Moon, Activity, Pill } from "lucide-react"
+import { Moon, Activity, Pill, CheckCircle2, Clock } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { trackWhatsAppLead } from "@/lib/whatsapp"
+import { siteConfig } from "@/lib/site-config"
 
 const treatments = [
   {
@@ -62,6 +63,15 @@ export function HeroSection() {
 
       <div className="container relative z-10 mx-auto px-4 lg:px-8 py-20">
         <div className="max-w-5xl mx-auto">
+          {siteConfig.offer.enabled && (
+            <div className="flex justify-center mb-6">
+              <span className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2 text-accent-foreground font-semibold shadow-lg text-sm md:text-base">
+                <CheckCircle2 className="h-5 w-5 shrink-0" />
+                {siteConfig.offer.label}
+              </span>
+            </div>
+          )}
+
           <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white text-center mb-6 text-balance max-w-4xl mx-auto">
             Alívio Especializado para Dor nas Costas, Pescoço e Coluna em Várzea Paulista
           </h1>
@@ -85,7 +95,7 @@ export function HeroSection() {
             })}
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-4">
             <Button
               asChild
               size="lg"
@@ -107,6 +117,19 @@ export function HeroSection() {
               </a>
             </Button>
           </div>
+
+          {siteConfig.offer.subtext && (
+            <p className="text-center text-white/90 text-sm md:text-base mb-3">{siteConfig.offer.subtext}</p>
+          )}
+
+          {siteConfig.urgency.enabled && (
+            <div className="flex justify-center mb-16">
+              <span className="inline-flex items-center gap-2 rounded-full bg-white/15 backdrop-blur-sm border border-white/30 px-4 py-1.5 text-white text-sm font-medium">
+                <Clock className="h-4 w-4 shrink-0" />
+                {siteConfig.urgency.text}
+              </span>
+            </div>
+          )}
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {treatments.map((treatment) => (
