@@ -30,12 +30,12 @@ const patients: PatientResult[] = [
       "Correcao progressiva do desalinhamento dos ombros e melhora do equilibrio postural geral. Tratamento realizado em 6 sessoes semanais, promovendo melhor ajuste corporal e maior conforto no dia a dia.",
     photos: [
       {
-        src: "/images/paciente1-frente.jpeg",
+        src: "/images/paciente1-frente.webp",
         label: "Vista Frontal",
         alt: "Paciente J.C. - comparativo frontal antes e depois do tratamento na Benevento Fisioterapia",
       },
       {
-        src: "/images/paciente1-costas.jpeg",
+        src: "/images/paciente1-costas.webp",
         label: "Vista Posterior",
         alt: "Paciente J.C. - comparativo posterior antes e depois do tratamento na Benevento Fisioterapia",
       },
@@ -52,12 +52,12 @@ const patients: PatientResult[] = [
       "Reducao das dores na regiao cervical e do trapezio, melhora da postura e maior equilibrio das cadeias musculares, contribuindo para melhor conforto durante a rotina de trabalho. Tratamento realizado em 8 sessoes.",
     photos: [
       {
-        src: "/images/paciente2-frente.png",
+        src: "/images/paciente2-frente.webp",
         label: "Vista Frontal",
         alt: "Paciente R.S. - comparativo frontal antes e depois do tratamento na Benevento Fisioterapia",
       },
       {
-        src: "/images/paciente2-costas.png",
+        src: "/images/paciente2-costas.webp",
         label: "Vista Posterior",
         alt: "Paciente R.S. - comparativo posterior antes e depois do tratamento na Benevento Fisioterapia",
       },
@@ -74,12 +74,12 @@ const patients: PatientResult[] = [
       "Diminuicao significativa das tensoes musculares, melhora da postura e reducao das dores na regiao cervical e trapezio, promovendo maior bem-estar e qualidade de vida no cotidiano.",
     photos: [
       {
-        src: "/images/paciente3-frente.png",
+        src: "/images/paciente3-frente.webp",
         label: "Vista Frontal",
         alt: "Paciente A.M. - comparativo frontal antes e depois do tratamento na Benevento Fisioterapia",
       },
       {
-        src: "/images/paciente3-costas.png",
+        src: "/images/paciente3-costas.webp",
         label: "Vista Posterior",
         alt: "Paciente A.M. - comparativo posterior antes e depois do tratamento na Benevento Fisioterapia",
       },
@@ -101,6 +101,7 @@ function PatientCard({ patient }: { patient: PatientResult }) {
               src={patient.photos[activePhoto].src}
               alt={patient.photos[activePhoto].alt}
               fill
+              sizes="(max-width: 768px) 320px, 380px"
               className="object-cover"
             />
             {/* Label */}
