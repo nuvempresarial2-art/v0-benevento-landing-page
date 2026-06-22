@@ -4,28 +4,7 @@ import React from "react"
 
 import { Button } from "@/components/ui/button"
 import { MessageCircle, Calendar } from "lucide-react"
-
-declare global {
-  interface Window {
-    fbq: (...args: unknown[]) => void
-  }
-}
-
-const trackWhatsAppConversion = (e: React.MouseEvent<HTMLAnchorElement>) => {
-  e.preventDefault()
-  const href = e.currentTarget.href
-  
-  if (typeof window !== "undefined" && window.fbq) {
-    window.fbq("track", "Lead", {
-      content_name: "WhatsApp Click",
-      content_category: "Contact",
-    })
-  }
-  
-  setTimeout(() => {
-    window.open(href, "_blank")
-  }, 300)
-}
+import { trackWhatsAppLead } from "@/lib/whatsapp"
 
 export function CTASchedulingSection() {
   const whatsappNumber = "5511995625889"
@@ -64,7 +43,7 @@ export function CTASchedulingSection() {
                   target="_blank"
                   rel="noopener noreferrer"
                   data-gtm="cta-whatsapp-footer"
-                  onClick={trackWhatsAppConversion}
+                  onClick={trackWhatsAppLead}
                 >
                   <MessageCircle className="mr-2 h-5 w-5" />
                   Falar no WhatsApp

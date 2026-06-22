@@ -4,28 +4,7 @@ import React from "react"
 
 import { Button } from "@/components/ui/button"
 import { Calendar, ClipboardCheck, HeartPulse, TrendingUp } from "lucide-react"
-
-declare global {
-  interface Window {
-    fbq: (...args: unknown[]) => void
-  }
-}
-
-const trackWhatsAppConversion = (e: React.MouseEvent<HTMLAnchorElement>) => {
-  e.preventDefault()
-  const href = e.currentTarget.href
-  
-  if (typeof window !== "undefined" && window.fbq) {
-    window.fbq("track", "Lead", {
-      content_name: "WhatsApp Click",
-      content_category: "Contact",
-    })
-  }
-  
-  setTimeout(() => {
-    window.open(href, "_blank")
-  }, 300)
-}
+import { trackWhatsAppLead } from "@/lib/whatsapp"
 
 const steps = [
   {
@@ -107,7 +86,7 @@ export function EvaluationProcessSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 data-gtm="cta-whatsapp-avaliacao-processo"
-                onClick={trackWhatsAppConversion}
+                onClick={trackWhatsAppLead}
               >
                 Quero Agendar Minha Avaliacao pelo WhatsApp
               </a>

@@ -7,12 +7,7 @@ import { Card } from "@/components/ui/card"
 import { Moon, Activity, Pill } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
-
-declare global {
-  interface Window {
-    fbq: (...args: unknown[]) => void
-  }
-}
+import { trackWhatsAppLead } from "@/lib/whatsapp"
 
 const treatments = [
   {
@@ -42,22 +37,6 @@ const benefits = [
   { icon: Activity, text: "Volte a se movimentar com seguranca" },
   { icon: Pill, text: "Reduza a necessidade de remedios" },
 ]
-
-const trackWhatsAppConversion = (e: React.MouseEvent<HTMLAnchorElement>) => {
-  e.preventDefault()
-  const href = e.currentTarget.href
-  
-  if (typeof window !== "undefined" && window.fbq) {
-    window.fbq("track", "Lead", {
-      content_name: "WhatsApp Click",
-      content_category: "Contact",
-    })
-  }
-  
-  setTimeout(() => {
-    window.open(href, "_blank")
-  }, 300)
-}
 
 export function HeroSection() {
   const whatsappNumber = "5511995625889"
@@ -112,7 +91,7 @@ export function HeroSection() {
               size="lg"
               className="bg-accent hover:bg-accent/90 text-accent-foreground text-lg px-10 h-14 font-semibold shadow-lg"
             >
-              <a href={waAgendarHref} target="_blank" rel="noopener noreferrer" data-gtm="cta-whatsapp-agendar" onClick={trackWhatsAppConversion}>
+              <a href={waAgendarHref} target="_blank" rel="noopener noreferrer" data-gtm="cta-whatsapp-agendar" onClick={trackWhatsAppLead}>
                 Agendar Avaliacao pelo WhatsApp
               </a>
             </Button>
@@ -123,7 +102,7 @@ export function HeroSection() {
               variant="outline"
               className="bg-white/95 hover:bg-white text-foreground text-lg px-10 h-14 border-2 font-semibold"
             >
-              <a href={waDuvidaHref} target="_blank" rel="noopener noreferrer" data-gtm="cta-whatsapp-duvida" onClick={trackWhatsAppConversion}>
+              <a href={waDuvidaHref} target="_blank" rel="noopener noreferrer" data-gtm="cta-whatsapp-duvida" onClick={trackWhatsAppLead}>
                 Quero Tirar uma Duvida
               </a>
             </Button>

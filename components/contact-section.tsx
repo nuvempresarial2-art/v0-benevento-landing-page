@@ -7,37 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { MessageCircle, Phone, MapPin } from "lucide-react"
 import { useState } from "react"
-
-declare global {
-  interface Window {
-    fbq: (...args: unknown[]) => void
-  }
-}
-
-const trackWhatsAppConversionClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-  e.preventDefault()
-  const href = e.currentTarget.href
-  
-  if (typeof window !== "undefined" && window.fbq) {
-    window.fbq("track", "Lead", {
-      content_name: "WhatsApp Click",
-      content_category: "Contact",
-    })
-  }
-  
-  setTimeout(() => {
-    window.open(href, "_blank")
-  }, 300)
-}
-
-const trackWhatsAppConversionForm = () => {
-  if (typeof window !== "undefined" && window.fbq) {
-    window.fbq("track", "Lead", {
-      content_name: "WhatsApp Click",
-      content_category: "Contact",
-    })
-  }
-}
+import { trackWhatsAppLead } from "@/lib/whatsapp"
 
 export function ContactSection() {
   const [formData, setFormData] = useState({
@@ -56,7 +26,7 @@ export function ContactSection() {
       `Ola! Meu nome eh ${formData.name}.\n\nTelefone: ${formData.phone}\n\nMensagem: ${formData.message}`,
     )
 
-    trackWhatsAppConversionForm()
+    trackWhatsAppLead()
 
     const whatsappHref = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${message}`
     window.open(whatsappHref, "_blank")
@@ -96,7 +66,7 @@ export function ContactSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 data-gtm="cta-whatsapp-contato"
-                onClick={trackWhatsAppConversionClick}
+                onClick={trackWhatsAppLead}
               >
                 <MessageCircle className="mr-2 h-5 w-5" />
                 Chamar no WhatsApp
