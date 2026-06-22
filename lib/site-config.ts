@@ -10,8 +10,8 @@ export const siteConfig = {
   // Ex.: "Avaliacao inicial gratuita" | "Avaliacao inicial: R$ 120"
   offer: {
     enabled: true,
-    label: "Avaliação inicial: <DEFINIR>",
-    subtext: "Cerca de 60 min: histórico, testes posturais e um plano feito para você.",
+    label: "Avaliação inicial: R$ 260 no PIX",
+    subtext: "Cerca de 90 min: histórico, testes posturais e um plano feito para você.",
   },
 
   // --- URGENCIA (honesta e editavel — sem afirmacoes falsas) ---------------

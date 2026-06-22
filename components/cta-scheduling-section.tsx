@@ -37,7 +37,7 @@ export function CTASchedulingSection() {
           </h2>
 
           <p className="text-lg text-muted-foreground mb-4 text-pretty max-w-[60ch] mx-auto leading-relaxed">
-            A avaliação inicial dura cerca de 60 minutos. Conversamos sobre seu histórico, realizamos testes físicos e
+            A avaliação inicial dura cerca de 90 minutos. Conversamos sobre seu histórico, realizamos testes físicos e
             posturais para entender sua condição e montamos um plano personalizado.
           </p>
 
