@@ -5,28 +5,7 @@ import React from "react"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Button } from "@/components/ui/button"
 import { MessageCircle } from "lucide-react"
-
-declare global {
-  interface Window {
-    fbq: (...args: unknown[]) => void
-  }
-}
-
-const trackWhatsAppConversion = (e: React.MouseEvent<HTMLAnchorElement>) => {
-  e.preventDefault()
-  const href = e.currentTarget.href
-  
-  if (typeof window !== "undefined" && window.fbq) {
-    window.fbq("track", "Lead", {
-      content_name: "WhatsApp Click",
-      content_category: "Contact",
-    })
-  }
-  
-  setTimeout(() => {
-    window.open(href, "_blank")
-  }, 300)
-}
+import { trackWhatsAppLead } from "@/lib/whatsapp"
 
 const faqs = [
   {
@@ -105,7 +84,7 @@ export function FAQSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 data-gtm="cta-whatsapp-faq"
-                onClick={trackWhatsAppConversion}
+                onClick={trackWhatsAppLead}
               >
                 <MessageCircle className="mr-2 h-4 w-4" />
                 Enviar Mensagem pelo WhatsApp

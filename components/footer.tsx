@@ -4,28 +4,7 @@ import React from "react"
 
 import { Facebook, Instagram, Phone, MapPin } from "lucide-react"
 import Link from "next/link"
-
-declare global {
-  interface Window {
-    fbq: (...args: unknown[]) => void
-  }
-}
-
-const trackWhatsAppConversion = (e: React.MouseEvent<HTMLAnchorElement>) => {
-  e.preventDefault()
-  const href = e.currentTarget.href
-  
-  if (typeof window !== "undefined" && window.fbq) {
-    window.fbq("track", "Lead", {
-      content_name: "WhatsApp Click",
-      content_category: "Contact",
-    })
-  }
-  
-  setTimeout(() => {
-    window.open(href, "_blank")
-  }, 300)
-}
+import { trackWhatsAppLead } from "@/lib/whatsapp"
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
@@ -50,7 +29,14 @@ export function Footer() {
             <p className="flex items-center justify-center gap-2">
               <Phone className="h-4 w-4" />
               <strong>WhatsApp:</strong>{" "}
-              <a href="https://api.whatsapp.com/send?phone=5511995625889" className="hover:underline font-medium" onClick={trackWhatsAppConversion}>
+              <a
+                href="https://api.whatsapp.com/send?phone=5511995625889"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-gtm="cta-whatsapp-footer-tel"
+                className="hover:underline font-medium"
+                onClick={trackWhatsAppLead}
+              >
                 (11) 99562-5889
               </a>
             </p>
