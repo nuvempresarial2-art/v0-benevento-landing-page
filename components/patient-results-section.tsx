@@ -3,6 +3,7 @@
 import { useRef, useState } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import Image from "next/image"
+import { siteConfig } from "@/lib/site-config"
 
 interface PatientResult {
   id: number
@@ -183,6 +184,10 @@ export function PatientResultsSection() {
     })
   }
 
+  // Compliance (COFFITO/CREFITO): fotos antes/depois podem ser ocultadas
+  // inteiramente alterando showBeforeAfterPhotos em lib/site-config.ts.
+  if (!siteConfig.showBeforeAfterPhotos) return null
+
   return (
     <section className="py-20 bg-secondary/20">
       <div className="container mx-auto px-4 lg:px-8">
@@ -235,6 +240,11 @@ export function PatientResultsSection() {
         {/* Instrucao mobile */}
         <p className="text-center text-xs text-muted-foreground mt-4 md:hidden">
           Deslize para ver mais pacientes
+        </p>
+
+        {/* Disclaimer obrigatorio — nao prometer cura */}
+        <p className="text-center text-xs text-muted-foreground/80 max-w-2xl mx-auto mt-8 text-pretty">
+          {siteConfig.resultsDisclaimer}
         </p>
       </div>
     </section>
