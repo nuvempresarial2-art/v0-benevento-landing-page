@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Moon, Activity, Pill } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 
 declare global {
   interface Window {
@@ -68,12 +69,15 @@ export function HeroSection() {
 
   return (
     <section id="home" className="relative min-h-[700px] flex items-center">
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage: `url('/images/image.png')`,
-        }}
-      >
+      <div className="absolute inset-0">
+        <Image
+          src="/images/hero.webp"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
         <div className="absolute inset-0 bg-secondary/75" />
       </div>
 
