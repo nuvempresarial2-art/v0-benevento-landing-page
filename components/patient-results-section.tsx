@@ -7,14 +7,8 @@ import { siteConfig } from "@/lib/site-config"
 
 interface PatientResult {
   id: number
-  name: string
-  age?: string
-  problem: string
-  treatment: string
-  result: string
   photos: {
     src: string
-    label: string
     alt: string
   }[]
 }
@@ -22,68 +16,28 @@ interface PatientResult {
 const patients: PatientResult[] = [
   {
     id: 1,
-    name: "Paciente J.C.",
-    problem:
-      "Desalinhamento postural visivel, com diferenca significativa entre os ombros. A assimetria era perceptivel inclusive ao vestir o uniforme de trabalho, causando incomodo estetico e funcional no dia a dia, apesar de nao apresentar dor.",
-    treatment:
-      "Sessoes de RPG (Reeducacao Postural Global) focadas na correcao do alinhamento corporal e equilibrio das cadeias musculares responsaveis pela postura.",
-    result:
-      "Correcao progressiva do desalinhamento dos ombros e melhora do equilibrio postural geral. Tratamento realizado em 6 sessoes semanais, promovendo melhor ajuste corporal e maior conforto no dia a dia.",
     photos: [
-      {
-        src: "/images/paciente1-frente.webp",
-        label: "Vista Frontal",
-        alt: "Paciente J.C. - comparativo frontal antes e depois do tratamento na Benevento Fisioterapia",
-      },
-      {
-        src: "/images/paciente1-costas.webp",
-        label: "Vista Posterior",
-        alt: "Paciente J.C. - comparativo posterior antes e depois do tratamento na Benevento Fisioterapia",
-      },
+      { src: "/images/paciente1-1.webp", alt: "Resultado de tratamento na Benevento Fisioterapia" },
+      { src: "/images/paciente1-2.webp", alt: "Resultado de tratamento na Benevento Fisioterapia" },
+      { src: "/images/paciente1-3.webp", alt: "Resultado de tratamento na Benevento Fisioterapia" },
+      { src: "/images/paciente1-4.webp", alt: "Resultado de tratamento na Benevento Fisioterapia" },
+      { src: "/images/paciente1-5.webp", alt: "Resultado de tratamento na Benevento Fisioterapia" },
+      { src: "/images/paciente1-6.webp", alt: "Resultado de tratamento na Benevento Fisioterapia" },
     ],
   },
   {
     id: 2,
-    name: "Paciente R.S.",
-    problem:
-      "Historico de escoliose desde a adolescencia, associado a rotina de trabalho prolongado sentado. Apresentava dores recorrentes principalmente na regiao do trapezio e cervical, alem de sobrecarga muscular.",
-    treatment:
-      "Tratamento fisioterapeutico com foco em correcao postural e reequilibrio muscular, utilizando tecnicas de RPG para melhorar o alinhamento da coluna e reduzir as tensoes musculares acumuladas.",
-    result:
-      "Reducao das dores na regiao cervical e do trapezio, melhora da postura e maior equilibrio das cadeias musculares, contribuindo para melhor conforto durante a rotina de trabalho. Tratamento realizado em 8 sessoes.",
     photos: [
-      {
-        src: "/images/paciente2-frente.webp",
-        label: "Vista Frontal",
-        alt: "Paciente R.S. - comparativo frontal antes e depois do tratamento na Benevento Fisioterapia",
-      },
-      {
-        src: "/images/paciente2-costas.webp",
-        label: "Vista Posterior",
-        alt: "Paciente R.S. - comparativo posterior antes e depois do tratamento na Benevento Fisioterapia",
-      },
+      { src: "/images/paciente2-1.webp", alt: "Resultado de tratamento na Benevento Fisioterapia" },
     ],
   },
   {
     id: 3,
-    name: "Paciente A.M.",
-    problem:
-      "Rotina de trabalho predominantemente sentada e alto nivel de estresse, apresentando dor intensa na regiao cervical e no trapezio, associada a tensao muscular e vicios posturais.",
-    treatment:
-      "Tratamento fisioterapeutico voltado inicialmente para reducao das tensoes musculares, seguido de correcao estrutural postural por meio de tecnicas de RPG para reeducacao muscular e alinhamento corporal.",
-    result:
-      "Diminuicao significativa das tensoes musculares, melhora da postura e reducao das dores na regiao cervical e trapezio, promovendo maior bem-estar e qualidade de vida no cotidiano.",
     photos: [
-      {
-        src: "/images/paciente3-frente.webp",
-        label: "Vista Frontal",
-        alt: "Paciente A.M. - comparativo frontal antes e depois do tratamento na Benevento Fisioterapia",
-      },
-      {
-        src: "/images/paciente3-costas.webp",
-        label: "Vista Posterior",
-        alt: "Paciente A.M. - comparativo posterior antes e depois do tratamento na Benevento Fisioterapia",
-      },
+      { src: "/images/paciente3-1.webp", alt: "Resultado de tratamento na Benevento Fisioterapia" },
+      { src: "/images/paciente3-2.webp", alt: "Resultado de tratamento na Benevento Fisioterapia" },
+      { src: "/images/paciente3-3.webp", alt: "Resultado de tratamento na Benevento Fisioterapia" },
+      { src: "/images/paciente3-4.webp", alt: "Resultado de tratamento na Benevento Fisioterapia" },
     ],
   },
 ]
@@ -91,11 +45,12 @@ const patients: PatientResult[] = [
 function PatientCard({ patient }: { patient: PatientResult }) {
   const [activePhoto, setActivePhoto] = useState(0)
   const hasPhotos = patient.photos.length > 0
+  const hasMultiple = patient.photos.length > 1
 
   return (
-    <div className="flex-shrink-0 w-[320px] md:w-[380px] bg-card rounded-2xl border border-border shadow-sm overflow-hidden flex flex-col">
-      {/* Fotos com navegação */}
-      <div className="relative bg-muted h-72">
+    <div className="flex-shrink-0 w-[320px] md:w-[380px] bg-card rounded-2xl border border-border shadow-sm overflow-hidden">
+      {/* Carrossel de fotos */}
+      <div className="relative bg-muted aspect-square">
         {hasPhotos ? (
           <>
             <Image
@@ -103,15 +58,11 @@ function PatientCard({ patient }: { patient: PatientResult }) {
               alt={patient.photos[activePhoto].alt}
               fill
               sizes="(max-width: 768px) 320px, 380px"
-              className="object-cover"
+              className="object-contain"
             />
-            {/* Label */}
-            <span className="absolute top-3 left-3 bg-primary text-primary-foreground text-xs font-semibold px-3 py-1 rounded-full">
-              {patient.photos[activePhoto].label}
-            </span>
 
             {/* Navegação entre fotos */}
-            {patient.photos.length > 1 && (
+            {hasMultiple && (
               <>
                 <button
                   onClick={() => setActivePhoto((prev) => (prev === 0 ? patient.photos.length - 1 : prev - 1))}
@@ -127,46 +78,26 @@ function PatientCard({ patient }: { patient: PatientResult }) {
                 >
                   <ChevronRight className="w-4 h-4" />
                 </button>
+
+                {/* Indicadores */}
+                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
+                  {patient.photos.map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setActivePhoto(idx)}
+                      className={`w-2 h-2 rounded-full transition-colors ${idx === activePhoto ? "bg-white" : "bg-white/40"}`}
+                      aria-label={`Ver foto ${idx + 1}`}
+                    />
+                  ))}
+                </div>
               </>
             )}
-
-            {/* Indicadores */}
-            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
-              {patient.photos.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setActivePhoto(idx)}
-                  className={`w-2 h-2 rounded-full transition-colors ${idx === activePhoto ? "bg-white" : "bg-white/40"}`}
-                  aria-label={`Ver foto ${idx + 1}`}
-                />
-              ))}
-            </div>
           </>
         ) : (
           <div className="flex items-center justify-center h-full text-muted-foreground text-sm">
             Foto em breve
           </div>
         )}
-      </div>
-
-      {/* Informacoes do paciente */}
-      <div className="p-5 flex flex-col gap-4 flex-1">
-        <h3 className="font-serif text-lg font-bold text-foreground">{patient.name}</h3>
-
-        <div className="flex flex-col gap-3">
-          <div>
-            <p className="text-xs font-semibold text-primary uppercase tracking-wide mb-1">Problema</p>
-            <p className="text-sm text-muted-foreground leading-relaxed">{patient.problem}</p>
-          </div>
-          <div>
-            <p className="text-xs font-semibold text-primary uppercase tracking-wide mb-1">Tratamento realizado</p>
-            <p className="text-sm text-muted-foreground leading-relaxed">{patient.treatment}</p>
-          </div>
-          <div>
-            <p className="text-xs font-semibold text-accent uppercase tracking-wide mb-1">Resultado</p>
-            <p className="text-sm text-foreground font-medium leading-relaxed">{patient.result}</p>
-          </div>
-        </div>
       </div>
     </div>
   )
