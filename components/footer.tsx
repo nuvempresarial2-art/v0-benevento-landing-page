@@ -1,76 +1,81 @@
 "use client"
 
-import React from "react"
-
-import { Facebook, Instagram, Phone, MapPin } from "lucide-react"
+import { Facebook, Instagram, Phone } from "lucide-react"
 import Link from "next/link"
-import { trackWhatsAppLead } from "@/lib/whatsapp"
+import { whatsappHref, trackWhatsAppLead } from "@/lib/whatsapp"
+
+// Links internos ficam so no rodape: preservam o SEO das paginas de tratamento
+// sem disputar atencao com o CTA no topo da pagina.
+const treatmentLinks = [
+  { label: "Quiropraxia Instrumental", href: "/tratamentos/quiropraxia-instrumental" },
+  { label: "RPG / RPM", href: "/tratamentos/rpg-rpm" },
+  { label: "Somato Análise", href: "/tratamentos/somato-analise" },
+  { label: "Terapia Floral", href: "/tratamentos/terapia-floral" },
+]
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="bg-accent text-accent-foreground py-12">
+    <footer className="bg-accent py-10 text-accent-foreground">
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="max-w-2xl mx-auto text-center mb-10">
-          <div className="inline-block bg-accent-foreground/10 px-6 py-3 rounded-lg mb-6">
-            <p className="font-semibold text-lg">CREFITO-3 | Fisioterapia Regulamentada</p>
-          </div>
-          <p className="text-lg leading-relaxed text-pretty">
-            Atendimento realizado por <strong>fisioterapeuta regulamentada</strong>, com formação acadêmica comprovada e
-            registro profissional ativo. Estamos em Várzea Paulista, região de Jundiaí. Envie uma mensagem mesmo que
-            ainda tenha dúvidas – teremos prazer em te atender.
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="mb-4 inline-block rounded-lg bg-accent-foreground/10 px-5 py-2 text-sm font-semibold">
+            CREFITO-3 · Fisioterapia regulamentada
           </p>
-        </div>
 
-        <div className="max-w-xl mx-auto text-center mb-8">
-          <h3 className="font-serif text-xl font-semibold mb-4">Entre em Contato</h3>
-          <div className="space-y-3 text-accent-foreground/90">
-            <p className="flex items-center justify-center gap-2">
-              <Phone className="h-4 w-4" />
-              <strong>WhatsApp:</strong>{" "}
-              <a
-                href="https://api.whatsapp.com/send?phone=5511995625889"
-                target="_blank"
-                rel="noopener noreferrer"
-                data-gtm="cta-whatsapp-footer-tel"
-                className="hover:underline font-medium"
-                onClick={trackWhatsAppLead}
+          <p className="mx-auto mb-6 max-w-[60ch] text-pretty text-sm leading-relaxed text-accent-foreground/90">
+            Atendimento realizado por fisioterapeuta registrada, em Várzea Paulista, região de Jundiaí.
+          </p>
+
+          <a
+            href={whatsappHref("Ola! Vim pelo site e gostaria de agendar uma consulta.")}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-gtm="cta-whatsapp-footer-tel"
+            onClick={trackWhatsAppLead}
+            className="inline-flex items-center gap-2 font-semibold hover:underline"
+          >
+            <Phone className="h-4 w-4 shrink-0" />
+            (11) 99562-5889
+          </a>
+
+          <nav className="mt-8 flex flex-wrap justify-center gap-x-5 gap-y-2">
+            {treatmentLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-xs text-accent-foreground/70 transition-colors hover:text-accent-foreground hover:underline"
               >
-                (11) 99562-5889
-              </a>
-            </p>
-            <p className="flex items-center justify-center gap-2">
-              <MapPin className="h-4 w-4" />
-              <span className="font-medium">Rua Antônio Feres Sada, 23 | Centro | Várzea Pta. | SP</span>
-            </p>
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+
+          <div className="mt-6 flex justify-center gap-3">
+            <Link
+              href="https://www.facebook.com/beneventofisioterapia"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex h-9 w-9 items-center justify-center rounded-full bg-accent-foreground/10 transition-colors hover:bg-accent-foreground/20"
+              aria-label="Facebook"
+            >
+              <Facebook className="h-4 w-4" />
+            </Link>
+            <Link
+              href="https://instagram.com/licemarabenevento"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex h-9 w-9 items-center justify-center rounded-full bg-accent-foreground/10 transition-colors hover:bg-accent-foreground/20"
+              aria-label="Instagram"
+            >
+              <Instagram className="h-4 w-4" />
+            </Link>
           </div>
-        </div>
 
-        <div className="flex justify-center gap-4 mb-8">
-          <Link
-            href="https://www.facebook.com/beneventofisioterapia"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-10 h-10 rounded-full bg-accent-foreground/10 hover:bg-accent-foreground/20 flex items-center justify-center transition-colors"
-            aria-label="Facebook"
-          >
-            <Facebook className="h-5 w-5" />
-          </Link>
-          <Link
-            href="https://instagram.com/licemarabenevento"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-10 h-10 rounded-full bg-accent-foreground/10 hover:bg-accent-foreground/20 flex items-center justify-center transition-colors"
-            aria-label="Instagram"
-          >
-            <Instagram className="h-5 w-5" />
-          </Link>
-        </div>
-
-        {/* Copyright */}
-        <div className="border-t border-accent-foreground/20 pt-6 text-center text-accent-foreground/70 text-sm">
-          <p>© {currentYear} Benevento - Fisioterapia e Práticas Integrativas. Todos os direitos reservados.</p>
+          <p className="mt-8 border-t border-accent-foreground/20 pt-5 text-xs text-accent-foreground/70">
+            © {currentYear} Benevento — Fisioterapia e Práticas Integrativas.
+          </p>
         </div>
       </div>
     </footer>

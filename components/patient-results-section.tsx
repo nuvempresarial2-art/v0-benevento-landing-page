@@ -1,9 +1,10 @@
 "use client"
 
 import { useRef, useState } from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { ChevronLeft, ChevronRight, MessageCircle } from "lucide-react"
 import Image from "next/image"
 import { siteConfig } from "@/lib/site-config"
+import { whatsappHref, trackWhatsAppLead } from "@/lib/whatsapp"
 
 interface PatientResult {
   id: number
@@ -120,18 +121,14 @@ export function PatientResultsSection() {
   if (!siteConfig.showBeforeAfterPhotos) return null
 
   return (
-    <section className="py-20 bg-secondary/20">
+    <section className="bg-secondary/20 py-14 md:py-20">
       <div className="container mx-auto px-4 lg:px-8">
         {/* Cabecalho */}
-        <div className="text-center mb-12">
-          <p className="text-primary font-semibold text-sm uppercase tracking-widest mb-2">Resultados Reais</p>
-          <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-4 text-balance">
-            Transformacoes dos Nossos Pacientes
+        <div className="mb-8 text-center">
+          <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-primary">Resultados reais</p>
+          <h2 className="text-balance font-serif text-2xl font-bold text-foreground md:text-4xl">
+            Pacientes atendidos aqui na clínica
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-pretty">
-            Veja a evolucao real de pacientes que passaram pelo tratamento na Benevento Fisioterapia. Resultados
-            conquistados com dedicacao, metodo e cuidado personalizado.
-          </p>
         </div>
 
         {/* Carrossel com botoes de navegacao */}
@@ -169,12 +166,24 @@ export function PatientResultsSection() {
         </div>
 
         {/* Instrucao mobile */}
-        <p className="text-center text-xs text-muted-foreground mt-4 md:hidden">
-          Deslize para ver mais pacientes
-        </p>
+        <p className="mt-4 text-center text-xs text-muted-foreground md:hidden">Deslize para ver mais pacientes</p>
+
+        <div className="mt-8 text-center">
+          <a
+            href={whatsappHref("Ola! Vi os resultados no site e quero agendar uma avaliacao.")}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-gtm="cta-whatsapp-contato"
+            onClick={trackWhatsAppLead}
+            className="inline-flex h-14 w-full max-w-sm items-center justify-center gap-2 rounded-xl bg-green-600 px-8 text-base font-bold text-white shadow-lg transition-colors hover:bg-green-700"
+          >
+            <MessageCircle className="h-5 w-5 shrink-0" />
+            Quero um plano para o meu caso
+          </a>
+        </div>
 
         {/* Disclaimer obrigatorio — nao prometer cura */}
-        <p className="text-center text-xs text-muted-foreground/80 max-w-2xl mx-auto mt-8 text-pretty">
+        <p className="mx-auto mt-8 max-w-2xl text-pretty text-center text-xs text-muted-foreground/80">
           {siteConfig.resultsDisclaimer}
         </p>
       </div>

@@ -1,156 +1,104 @@
 "use client"
 
-import React from "react"
-
-import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
-import { Moon, Activity, Pill, CheckCircle2, Clock } from "lucide-react"
-import Link from "next/link"
+import { Moon, Activity, Pill, CheckCircle2, Clock, MessageCircle } from "lucide-react"
 import Image from "next/image"
-import { trackWhatsAppLead } from "@/lib/whatsapp"
+import { whatsappHref, trackWhatsAppLead } from "@/lib/whatsapp"
 import { siteConfig } from "@/lib/site-config"
 
-const treatments = [
-  {
-    title: "Quiropraxia Instrumental",
-    description: "Alivio rapido sem manobras agressivas",
-    link: "/tratamentos/quiropraxia-instrumental",
-  },
-  {
-    title: "RPG/RPM",
-    description: "Corrija sua postura e elimine dores",
-    link: "/tratamentos/rpg-rpm",
-  },
-  {
-    title: "Somato Analise",
-    description: "Libere tensoes que viram dor fisica",
-    link: "/tratamentos/somato-analise",
-  },
-  {
-    title: "Terapia Floral",
-    description: "Equilibrio emocional e recuperacao",
-    link: "/tratamentos/terapia-floral",
-  },
-]
-
 const benefits = [
-  { icon: Moon, text: "Durma melhor sem dor" },
-  { icon: Activity, text: "Volte a se movimentar com seguranca" },
-  { icon: Pill, text: "Reduza a necessidade de remedios" },
+  { icon: Moon, text: "Durma sem dor" },
+  { icon: Activity, text: "Volte a se movimentar" },
+  { icon: Pill, text: "Menos remédios" },
 ]
 
-export function HeroSection() {
-  const whatsappNumber = "5511995625889"
-  const agendarMsg = "Ola! Vim pelo site e gostaria de agendar uma avaliacao para dor nas costas."
-  const duvidaMsg = "Ola! Tenho uma duvida sobre o tratamento."
+const AGENDAR_MSG = "Ola! Vim pelo site e gostaria de agendar uma avaliacao para dor nas costas."
+const DUVIDA_MSG = "Ola! Tenho uma duvida sobre o tratamento."
 
-  const waAgendarHref = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(agendarMsg)}`
-  const waDuvidaHref = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(duvidaMsg)}`
+/**
+ * Hero otimizado para trafego pago.
+ *
+ * Regra que guia este bloco: o CTA precisa caber ACIMA DA DOBRA no mobile.
+ * Por isso nao ha cards de tratamento nem links de saida aqui — cada clique
+ * que nao vai para o WhatsApp e um lead pago perdido.
+ */
+export function HeroSection() {
+  const badgeText = siteConfig.offer.showPriceInHeroBadge ? siteConfig.offer.label : siteConfig.offer.heroBadge
 
   return (
-    <section id="home" className="relative min-h-[700px] flex items-center">
+    <section id="home" className="relative flex items-center">
       <div className="absolute inset-0">
-        <Image
-          src="/images/hero.webp"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center"
-        />
-        <div className="absolute inset-0 bg-secondary/75" />
+        <Image src="/images/hero.webp" alt="" fill priority sizes="100vw" className="object-cover object-center" />
+        <div className="absolute inset-0 bg-secondary/80" />
       </div>
 
-      <div className="container relative z-10 mx-auto px-4 lg:px-8 py-20">
-        <div className="max-w-5xl mx-auto">
+      <div className="container relative z-10 mx-auto px-4 py-10 md:py-20 lg:px-8">
+        <div className="mx-auto max-w-3xl text-center">
           {siteConfig.offer.enabled && (
-            <div className="flex justify-center mb-6">
-              <span className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2 text-accent-foreground font-semibold shadow-lg text-sm md:text-base">
-                <CheckCircle2 className="h-5 w-5 shrink-0" />
-                {siteConfig.offer.label}
-              </span>
-            </div>
+            <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-1.5 text-sm font-medium text-white ring-1 ring-white/30 backdrop-blur-sm">
+              <CheckCircle2 className="h-4 w-4 shrink-0" />
+              {badgeText}
+            </span>
           )}
 
-          <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white text-center mb-6 text-balance max-w-4xl mx-auto">
-            Alívio Especializado para Dor nas Costas, Pescoço e Coluna em Várzea Paulista
+          <h1 className="mb-3 text-balance font-serif text-3xl font-bold text-white md:text-5xl">
+            Alívio para Dor nas Costas e Coluna em Várzea Paulista
           </h1>
 
-          <p className="text-lg md:text-xl text-white/95 text-center mb-8 max-w-[70ch] mx-auto text-pretty leading-relaxed">
-            Fisioterapia integrativa com quiropraxia, RPG e somato análise. Tratamento personalizado que une corpo,
-            mente e emoções.
+          <p className="mx-auto mb-5 max-w-[46ch] text-pretty text-base leading-relaxed text-white/95 md:text-xl">
+            Fisioterapia integrativa com quiropraxia e RPG, feita sob medida para o seu caso.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-10">
+          <div className="mb-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
             {benefits.map((benefit) => {
               const Icon = benefit.icon
               return (
-                <div key={benefit.text} className="flex items-center gap-3 text-white">
-                  <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
-                    <Icon className="h-5 w-5 text-white" />
-                  </div>
-                  <span className="font-medium">{benefit.text}</span>
+                <div key={benefit.text} className="flex items-center gap-2 text-sm font-medium text-white md:text-base">
+                  <Icon className="h-4 w-4 shrink-0 text-white/80" />
+                  {benefit.text}
                 </div>
               )
             })}
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-4">
-            <Button
-              asChild
-              size="lg"
-              className="bg-accent hover:bg-accent/90 text-accent-foreground text-lg px-10 h-14 font-semibold shadow-lg"
-            >
-              <a href={waAgendarHref} target="_blank" rel="noopener noreferrer" data-gtm="cta-whatsapp-agendar" onClick={trackWhatsAppLead}>
-                Agendar Avaliacao pelo WhatsApp
-              </a>
-            </Button>
+          {/* CTA unico e dominante. O secundario e um link discreto de proposito:
+              dois botoes do mesmo peso dividem o clique. */}
+          <a
+            href={whatsappHref(AGENDAR_MSG)}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-gtm="cta-whatsapp-agendar"
+            onClick={trackWhatsAppLead}
+            className="inline-flex h-14 w-full max-w-md items-center justify-center gap-2 rounded-xl bg-green-600 px-8 text-base font-bold text-white shadow-xl transition-colors hover:bg-green-700 md:text-lg"
+          >
+            <MessageCircle className="h-5 w-5 shrink-0" />
+            Agendar minha avaliação
+          </a>
 
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="bg-white/95 hover:bg-white text-foreground text-lg px-10 h-14 border-2 font-semibold"
-            >
-              <a href={waDuvidaHref} target="_blank" rel="noopener noreferrer" data-gtm="cta-whatsapp-duvida" onClick={trackWhatsAppLead}>
-                Quero Tirar uma Duvida
-              </a>
-            </Button>
-          </div>
-
-          {siteConfig.offer.subtext && (
-            <p className="text-center text-white/90 text-sm md:text-base mb-3">{siteConfig.offer.subtext}</p>
+          {siteConfig.offer.enabled && !siteConfig.offer.showPriceInHeroBadge && (
+            <p className="mx-auto mt-3 max-w-[42ch] text-sm text-white/85">
+              {siteConfig.offer.label} · avaliação de cerca de 90 minutos, sem pacote fechado.
+            </p>
           )}
+
+          <p className="mt-3">
+            <a
+              href={whatsappHref(DUVIDA_MSG)}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-gtm="cta-whatsapp-duvida"
+              onClick={trackWhatsAppLead}
+              className="text-sm text-white/80 underline underline-offset-4 transition-colors hover:text-white"
+            >
+              Ainda tenho dúvidas, quero só conversar
+            </a>
+          </p>
 
           {siteConfig.urgency.enabled && (
-            <div className="flex justify-center mb-16">
-              <span className="inline-flex items-center gap-2 rounded-full bg-white/15 backdrop-blur-sm border border-white/30 px-4 py-1.5 text-white text-sm font-medium">
-                <Clock className="h-4 w-4 shrink-0" />
-                {siteConfig.urgency.text}
-              </span>
-            </div>
+            <p className="mt-5 inline-flex items-center gap-2 rounded-full bg-black/20 px-4 py-1.5 text-xs font-medium text-white backdrop-blur-sm md:text-sm">
+              <Clock className="h-4 w-4 shrink-0" />
+              {siteConfig.urgency.text}
+            </p>
           )}
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {treatments.map((treatment) => (
-              <Card
-                key={treatment.title}
-                className="p-6 bg-white/95 backdrop-blur-sm border-none shadow-lg hover:shadow-xl transition-shadow flex flex-col"
-              >
-                <h3 className="font-serif text-lg font-semibold text-foreground mb-2 text-balance">
-                  {treatment.title}
-                </h3>
-                <p className="text-sm text-muted-foreground mb-4 text-pretty flex-grow">{treatment.description}</p>
-                <Button
-                  asChild
-                  variant="default"
-                  className="w-full bg-accent hover:bg-accent/90 text-accent-foreground mt-auto"
-                >
-                  <Link href={treatment.link}>Saiba mais</Link>
-                </Button>
-              </Card>
-            ))}
-          </div>
         </div>
       </div>
     </section>

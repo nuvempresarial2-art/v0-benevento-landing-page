@@ -1,82 +1,81 @@
 "use client"
 
-import React from "react"
-
-import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import Image from "next/image"
-import { trackWhatsAppLead } from "@/lib/whatsapp"
+import { MessageCircle, Hand, User, Brain, Flower } from "lucide-react"
+import { whatsappHref, trackWhatsAppLead } from "@/lib/whatsapp"
+
+// As tecnicas viraram chips aqui (antes eram uma secao inteira). Mantem as
+// palavras-chave e o diferencial sem custar mais uma rolagem.
+const techniques = [
+  { icon: Hand, name: "Quiropraxia instrumental" },
+  { icon: User, name: "RPG / RPM" },
+  { icon: Brain, name: "Somato Análise" },
+  { icon: Flower, name: "Terapia floral e auriculoterapia" },
+]
+
+const MESSAGE = "Ola! Gostaria de agendar uma avaliacao com a Dra. Licemara."
 
 export function AboutSection() {
-  const whatsappNumber = "5511995625889"
-  const message = "Ola! Gostaria de agendar uma avaliacao com a Dra. Licemara."
-  const whatsappHref = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(message)}`
-
   return (
-    <section id="sobre" className="py-20 bg-white">
+    <section id="sobre" className="bg-white py-14 md:py-20">
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="font-serif text-3xl md:text-4xl font-bold text-center text-foreground mb-4 text-balance">
-            Conheça a Dra. Licemara Benevento
+        <div className="mx-auto max-w-5xl">
+          <h2 className="mb-8 text-balance text-center font-serif text-2xl font-bold text-foreground md:mb-10 md:text-4xl">
+            Quem vai te atender
           </h2>
 
-          <p className="text-lg text-center text-muted-foreground mb-16 text-pretty">
-            Mais de 15 anos dedicados a ajudar pessoas a viverem sem dor
-          </p>
-
-          <Card className="p-8 md:p-12 bg-muted shadow-lg">
-            <div className="grid md:grid-cols-[2fr,3fr] gap-12 items-center">
-              <div>
-                <div className="relative aspect-square rounded-lg overflow-hidden shadow-md">
-                  <Image
-                    src="/images/imagem-20do-20whatsapp-20de-202025-02-26-20a-cc-80-28s-29-2016-45-52-5968361b.avif"
-                    alt="Dra. Licemara Benevento"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
+          <Card className="bg-muted p-6 shadow-lg md:p-10">
+            <div className="grid items-center gap-8 md:grid-cols-[2fr_3fr]">
+              <div className="relative mx-auto aspect-square w-48 overflow-hidden rounded-xl shadow-md md:w-full">
+                <Image
+                  src="/images/imagem-20do-20whatsapp-20de-202025-02-26-20a-cc-80-28s-29-2016-45-52-5968361b.avif"
+                  alt="Dra. Licemara Benevento"
+                  fill
+                  sizes="(max-width: 768px) 192px, 40vw"
+                  className="object-cover"
+                />
               </div>
 
-              {/* Texto à direita - reduzido para 2-3 parágrafos */}
               <div>
-                <div className="space-y-5 text-muted-foreground leading-relaxed">
-                  <p className="text-pretty">
-                    A Dra. Licemara entende o que é conviver com dor porque acompanhou milhares de pacientes ao longo de{" "}
-                    <strong className="text-foreground">mais de 15 anos</strong>. Formada em{" "}
-                    <strong className="text-foreground">Fisioterapia pela Universidade Paulista</strong>, com
-                    pós-graduação em{" "}
-                    <strong className="text-foreground">Quiropraxia, Somato Análise e Naturopatia</strong>.
-                  </p>
+                <p className="text-pretty leading-relaxed text-muted-foreground">
+                  <strong className="text-foreground">Dra. Licemara Benevento</strong> — fisioterapeuta há mais de 15
+                  anos, formada pela Universidade Paulista, com pós-graduação em Quiropraxia, Somato Análise e
+                  Naturopatia. Registro ativo no CREFITO-3.
+                </p>
 
-                  <p className="text-pretty">
-                    Aqui você não é mais um número. Você é ouvido, compreendido e tratado de forma integral:{" "}
-                    <strong className="text-foreground">corpo, mente e emoção trabalhando juntos</strong> pela sua
-                    recuperação.
-                  </p>
-
-                  <blockquote className="bg-white border-l-4 border-primary p-5 rounded-r-lg mt-6">
-                    <p className="text-foreground italic text-pretty font-serif text-lg">
-                      "Meu compromisso é te ajudar a voltar a viver em paz com o seu corpo, sem medo e sem limitações."
-                    </p>
-                    <footer className="text-sm text-muted-foreground mt-3">— Dra. Licemara Benevento</footer>
-                  </blockquote>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {techniques.map((technique) => {
+                    const Icon = technique.icon
+                    return (
+                      <span
+                        key={technique.name}
+                        className="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-foreground shadow-sm md:text-sm"
+                      >
+                        <Icon className="h-3.5 w-3.5 shrink-0 text-primary" />
+                        {technique.name}
+                      </span>
+                    )
+                  })}
                 </div>
 
-                <Button
-                  asChild
-                  size="lg"
-                  className="mt-8 bg-accent hover:bg-accent/90 text-accent-foreground font-semibold"
+                <blockquote className="mt-6 rounded-r-lg border-l-4 border-primary bg-white p-5">
+                  <p className="text-pretty font-serif italic text-foreground">
+                    "Meu compromisso é te ajudar a voltar a viver em paz com o seu corpo, sem medo e sem limitações."
+                  </p>
+                </blockquote>
+
+                <a
+                  href={whatsappHref(MESSAGE)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-gtm="cta-whatsapp-avaliacao-sobre"
+                  onClick={trackWhatsAppLead}
+                  className="mt-6 inline-flex h-14 w-full items-center justify-center gap-2 rounded-xl bg-green-600 px-8 text-base font-bold text-white shadow-lg transition-colors hover:bg-green-700 sm:w-auto"
                 >
-                  <a
-                    href={whatsappHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    data-gtm="cta-whatsapp-avaliacao-sobre"
-                    onClick={trackWhatsAppLead}
-                  >
-                    Agende sua Avaliacao
-                  </a>
-                </Button>
+                  <MessageCircle className="h-5 w-5 shrink-0" />
+                  Falar com a Dra. Licemara
+                </a>
               </div>
             </div>
           </Card>

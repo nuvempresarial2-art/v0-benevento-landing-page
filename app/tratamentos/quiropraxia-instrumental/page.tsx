@@ -1,5 +1,6 @@
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
+import { WhatsAppCtaButton } from "@/components/whatsapp-cta-button"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Check, MessageCircle, Heart, Sparkles, Clock } from "lucide-react"
@@ -27,12 +28,13 @@ export default function QuiropraxiaInstrumentalPage() {
               <p className="text-xl md:text-2xl text-muted-foreground mb-8 text-balance">
                 Alívio rápido e seguro para dores na coluna, sem manobras agressivas
               </p>
-              <Link href="https://api.whatsapp.com/send?phone=5511995625889">
-                <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground text-lg px-8 py-6">
-                  <MessageCircle className="mr-2 h-5 w-5" />
-                  Agendar pelo WhatsApp
-                </Button>
-              </Link>
+              <WhatsAppCtaButton
+                message="Ola! Vim pelo site e gostaria de agendar uma avaliacao."
+                label="Agendar pelo WhatsApp"
+                gtm="cta-whatsapp-tratamento-topo"
+                size="lg"
+                className="h-auto px-8 py-6 text-lg"
+              />
               <p className="text-muted-foreground mt-4">Atendimento em Várzea Paulista – SP | Benevento Fisioterapia</p>
             </div>
           </div>
@@ -295,15 +297,13 @@ export default function QuiropraxiaInstrumentalPage() {
               <p className="text-xl mb-8 text-accent-foreground/90">
                 Agende sua avaliação e descubra como a quiropraxia instrumental pode transformar sua qualidade de vida.
               </p>
-              <Link href="https://api.whatsapp.com/send?phone=5511995625889">
-                <Button
-                  size="lg"
-                  className="bg-accent-foreground text-accent hover:bg-accent-foreground/90 text-lg px-8 py-6"
-                >
-                  <MessageCircle className="mr-2 h-5 w-5" />
-                  Agendar pelo WhatsApp
-                </Button>
-              </Link>
+              <WhatsAppCtaButton
+                message="Ola! Vim pelo site e gostaria de agendar uma avaliacao."
+                label="Agendar pelo WhatsApp"
+                gtm="cta-whatsapp-tratamento-final"
+                size="lg"
+                className="h-auto px-8 py-6 text-lg"
+              />
             </div>
           </div>
         </section>

@@ -2,17 +2,12 @@
 
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
+import { WhatsAppCtaButton } from "@/components/whatsapp-cta-button"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Flower2, Heart, Sparkles, Brain, CheckCircle2 } from "lucide-react"
 
 export default function TerapiaFloralPage() {
-  const handleWhatsAppClick = () => {
-    const whatsappNumber = "5511995625889"
-    const message = encodeURIComponent("Ola! Gostaria de saber mais sobre Terapia Floral.")
-    window.open(`https://wa.me/${whatsappNumber}?text=${message}`, "_blank")
-  }
-
   const benefits = [
     "Redução de ansiedade e estresse",
     "Melhora do equilíbrio emocional",
@@ -46,13 +41,13 @@ export default function TerapiaFloralPage() {
               bem-estar integral.
             </p>
             <div className="flex justify-center">
-              <Button
+              <WhatsAppCtaButton
+                message="Ola! Gostaria de saber mais sobre Terapia Floral."
+                label="Agendar Consulta pelo WhatsApp"
+                gtm="cta-whatsapp-tratamento-topo"
                 size="lg"
-                onClick={handleWhatsAppClick}
-                className="bg-accent hover:bg-accent/90 text-accent-foreground text-lg px-10 h-14 font-semibold"
-              >
-                Agendar Consulta pelo WhatsApp
-              </Button>
+                className="h-14 px-10 text-lg"
+              />
             </div>
           </div>
         </section>
@@ -167,13 +162,13 @@ export default function TerapiaFloralPage() {
               Agende uma consulta e descubra como a Terapia Floral pode ajudar você a alcançar equilíbrio emocional e
               bem-estar integral.
             </p>
-            <Button
+            <WhatsAppCtaButton
+              message="Ola! Gostaria de saber mais sobre Terapia Floral."
+              label="Agendar Consulta pelo WhatsApp"
+              gtm="cta-whatsapp-tratamento-final"
               size="lg"
-              onClick={handleWhatsAppClick}
-              className="bg-accent hover:bg-accent/90 text-accent-foreground text-lg px-10 h-14 font-semibold"
-            >
-              Agendar Consulta pelo WhatsApp
-            </Button>
+              className="h-14 px-10 text-lg"
+            />
           </div>
         </section>
       </main>

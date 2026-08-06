@@ -1,40 +1,39 @@
 import { Header } from "@/components/header"
 import { HeroSection } from "@/components/hero-section"
-import { LocationSection } from "@/components/location-section"
+import { TrustBar } from "@/components/trust-bar"
 import { PatientResultsSection } from "@/components/patient-results-section"
 import { UnifiedPainSection } from "@/components/unified-pain-section"
-import { QuoteSection } from "@/components/quote-section"
-import { WhyChooseSection } from "@/components/why-choose-section"
 import { EvaluationProcessSection } from "@/components/evaluation-process-section"
-import { IntegrativeApproachSection } from "@/components/integrative-approach-section"
-import { UnifiedResultsSection } from "@/components/unified-results-section"
 import { AboutSection } from "@/components/about-section"
-import { TreatmentsSection } from "@/components/treatments-section"
-import { CTASchedulingSection } from "@/components/cta-scheduling-section"
 import { FAQSection } from "@/components/faq-section"
-import { NewsletterSection } from "@/components/newsletter-section"
-import { ContactSection } from "@/components/contact-section"
+import { CTASchedulingSection } from "@/components/cta-scheduling-section"
 import { Footer } from "@/components/footer"
 
+/**
+ * Landing de trafego pago — sequencia deliberada:
+ * oferta -> prova -> reconhecimento do problema -> como funciona ->
+ * quem atende -> objecoes -> fechamento.
+ *
+ * O pb-24 no mobile reserva espaco para a barra fixa de WhatsApp.
+ *
+ * Secoes retiradas por nao contribuirem para o clique (os arquivos seguem no
+ * repo, e so reimportar): QuoteSection, IntegrativeApproachSection (virou os
+ * chips do AboutSection), UnifiedResultsSection, TreatmentsSection (os links
+ * foram para o rodape), NewsletterSection, ContactSection (o formulario so
+ * reabria o WhatsApp) e LocationSection (foi para o CTA final).
+ */
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen pb-24 md:pb-0">
       <Header />
       <HeroSection />
-      <LocationSection />
+      <TrustBar />
       <PatientResultsSection />
       <UnifiedPainSection />
-      <QuoteSection />
-      <WhyChooseSection />
       <EvaluationProcessSection />
-      <IntegrativeApproachSection />
-      <UnifiedResultsSection />
       <AboutSection />
-      <TreatmentsSection />
-      <CTASchedulingSection />
       <FAQSection />
-      <NewsletterSection />
-      <ContactSection />
+      <CTASchedulingSection />
       <Footer />
     </main>
   )

@@ -1,96 +1,89 @@
 "use client"
 
-import React from "react"
-
-import { Button } from "@/components/ui/button"
-import { Calendar, ClipboardCheck, HeartPulse, TrendingUp } from "lucide-react"
-import { trackWhatsAppLead } from "@/lib/whatsapp"
+import { Calendar, ClipboardCheck, HeartPulse, TrendingUp, MessageCircle } from "lucide-react"
+import { whatsappHref, trackWhatsAppLead } from "@/lib/whatsapp"
+import { siteConfig } from "@/lib/site-config"
 
 const steps = [
   {
     number: 1,
     icon: Calendar,
-    title: "Agende sua Avaliação",
-    description: "Entre em contato por WhatsApp. Escolha o melhor dia e horário para você.",
+    title: "Você chama no WhatsApp",
+    description: "Conta o que está sentindo e escolhe o melhor horário.",
   },
   {
     number: 2,
     icon: ClipboardCheck,
-    title: "Avaliação Completa",
-    description: "Análise detalhada da sua postura, movimento e fatores emocionais envolvidos.",
+    title: "Avaliação de 90 minutos",
+    description: "Histórico, testes posturais e de movimento, sem pressa.",
   },
   {
     number: 3,
     icon: HeartPulse,
-    title: "Plano Personalizado",
-    description: "Criamos um tratamento sob medida, combinando as técnicas mais adequadas para você.",
+    title: "Plano para o seu caso",
+    description: "Nada de protocolo pronto — o tratamento é montado para você.",
   },
   {
     number: 4,
     icon: TrendingUp,
-    title: "Acompanhamento Contínuo",
-    description: "Monitoramos sua evolução e ajustamos o tratamento para garantir os melhores resultados.",
+    title: "Acompanhamento",
+    description: "Ajustamos o plano conforme a sua evolução.",
   },
 ]
 
-export function EvaluationProcessSection() {
-  const whatsappNumber = "5511995625889"
-  const message = "Ola! Quero agendar minha avaliacao pelo WhatsApp."
-  const whatsappHref = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
+const MESSAGE = "Ola! Quero agendar minha avaliacao pelo WhatsApp."
 
+export function EvaluationProcessSection() {
   return (
-    <section className="py-20 bg-muted">
+    <section className="bg-muted py-14 md:py-20">
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="font-serif text-3xl md:text-4xl font-bold text-center text-foreground mb-4 text-balance">
-            Como Funciona a Avaliação
+        <div className="mx-auto max-w-5xl">
+          <h2 className="mb-3 text-balance text-center font-serif text-2xl font-bold text-foreground md:text-4xl">
+            O que acontece depois que você chama
           </h2>
 
-          <p className="text-lg text-center text-muted-foreground mb-16 text-pretty max-w-[65ch] mx-auto">
-            Um processo simples e acolhedor para você começar sua jornada rumo ao alívio da dor
+          {/* Tirar o "medo do clique" e o principal ganho de conversao aqui:
+              a pessoa precisa saber exatamente o que vem a seguir. */}
+          <p className="mx-auto mb-10 max-w-[52ch] text-pretty text-center text-sm text-muted-foreground md:text-base">
+            O botão abre uma conversa no WhatsApp. Sem formulário, sem compromisso.
           </p>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <div className="mb-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {steps.map((step) => {
               const Icon = step.icon
               return (
-                <div key={step.number} className="relative">
-                  <div className="bg-white p-6 rounded-lg shadow-md h-full flex flex-col">
-                    <div className="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-white font-bold text-xl mb-4">
+                <div key={step.number} className="flex h-full flex-col rounded-xl bg-white p-5 shadow-md">
+                  <div className="mb-3 flex items-center gap-3">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary font-bold text-white">
                       {step.number}
-                    </div>
-                    <Icon className="h-8 w-8 text-secondary mb-4" />
-                    <h3 className="font-serif text-lg font-semibold text-foreground mb-3 text-balance">
-                      {step.title}
-                    </h3>
-                    <p className="text-muted-foreground text-sm text-pretty leading-relaxed">
-                      {step.description}
-                    </p>
+                    </span>
+                    <Icon className="h-6 w-6 text-secondary" />
                   </div>
-                  {step.number < 4 && (
-                    <div className="hidden lg:block absolute top-7 left-full w-full h-0.5 bg-primary/20 -translate-x-3" />
-                  )}
+                  <h3 className="mb-2 text-balance font-serif text-base font-semibold text-foreground md:text-lg">
+                    {step.title}
+                  </h3>
+                  <p className="text-pretty text-sm leading-relaxed text-muted-foreground">{step.description}</p>
                 </div>
               )
             })}
           </div>
 
           <div className="text-center">
-            <Button
-              asChild
-              size="lg"
-              className="bg-accent hover:bg-accent/90 text-accent-foreground text-lg px-10 h-14 font-semibold shadow-lg"
+            <a
+              href={whatsappHref(MESSAGE)}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-gtm="cta-whatsapp-avaliacao-processo"
+              onClick={trackWhatsAppLead}
+              className="inline-flex h-14 w-full max-w-sm items-center justify-center gap-2 rounded-xl bg-green-600 px-8 text-base font-bold text-white shadow-lg transition-colors hover:bg-green-700 md:text-lg"
             >
-              <a
-                href={whatsappHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                data-gtm="cta-whatsapp-avaliacao-processo"
-                onClick={trackWhatsAppLead}
-              >
-                Quero Agendar Minha Avaliacao pelo WhatsApp
-              </a>
-            </Button>
+              <MessageCircle className="h-5 w-5 shrink-0" />
+              Agendar minha avaliação
+            </a>
+
+            {siteConfig.offer.enabled && (
+              <p className="mt-3 text-sm text-muted-foreground">{siteConfig.offer.label}</p>
+            )}
           </div>
         </div>
       </div>

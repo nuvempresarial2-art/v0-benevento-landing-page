@@ -1,71 +1,39 @@
 import Link from "next/link"
 import Image from "next/image"
-import { Facebook, Instagram } from "lucide-react"
 import { WhatsAppCtaButton } from "@/components/whatsapp-cta-button"
 
+/**
+ * Header enxuto para trafego pago.
+ *
+ * Nao ha menu de navegacao nem icones de redes sociais de proposito: em uma
+ * landing paga, cada link no topo e uma rota de fuga antes do primeiro CTA.
+ * Sobra o logo (credibilidade) e o botao de WhatsApp (a unica acao).
+ */
 export function Header() {
   return (
-    <header className="sticky top-0 z-50 w-full bg-white border-b border-border shadow-sm">
+    <header className="sticky top-0 z-40 w-full border-b border-border bg-white shadow-sm">
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-3">
+        <div className="flex h-16 items-center justify-between md:h-20">
+          <Link href="/" className="flex items-center gap-3" aria-label="Benevento Fisioterapia">
+            {/* Logo servido localmente: o blob remoto anterior nao estava
+                liberado em next.config (quebrava o dev) e custava uma
+                requisicao a terceiro no caminho do LCP. */}
             <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/BENEVENTO%20-%20LOGO%20FINAL-CUqe4raA4nK92pBVicZZL1l75NDZA4.avif"
+              src="/images/benevento-20-20logo-20final.avif"
               alt="Benevento - Fisioterapia e Práticas Integrativas"
               width={220}
               height={80}
-              className="h-14 w-auto"
+              className="h-11 w-auto md:h-14"
               priority
             />
           </Link>
 
-          {/* Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
-            <Link href="#home" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-              Home
-            </Link>
-            <Link href="#sobre" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-              Sobre
-            </Link>
-            <Link
-              href="#tratamentos"
-              className="text-sm font-medium text-foreground hover:text-primary transition-colors"
-            >
-              Tratamentos
-            </Link>
-            <Link href="#contato" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-              Contato
-            </Link>
-          </nav>
-
-          {/* CTA + Social Icons */}
-          <div className="flex items-center gap-4">
-            <Link
-              href="https://www.facebook.com/beneventofisioterapia"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden sm:block text-muted-foreground hover:text-primary transition-colors"
-              aria-label="Facebook"
-            >
-              <Facebook className="h-5 w-5" />
-            </Link>
-            <Link
-              href="https://instagram.com/licemarabenevento"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden sm:block text-muted-foreground hover:text-primary transition-colors"
-              aria-label="Instagram"
-            >
-              <Instagram className="h-5 w-5" />
-            </Link>
-            <WhatsAppCtaButton
-              message="Ola! Vim pelo site e gostaria de agendar uma avaliacao para dor nas costas."
-              label="Agendar"
-              gtm="cta-whatsapp-header"
-              size="sm"
-            />
-          </div>
+          <WhatsAppCtaButton
+            message="Ola! Vim pelo site e gostaria de agendar uma avaliacao para dor nas costas."
+            label="Agendar"
+            gtm="cta-whatsapp-header"
+            size="sm"
+          />
         </div>
       </div>
     </header>

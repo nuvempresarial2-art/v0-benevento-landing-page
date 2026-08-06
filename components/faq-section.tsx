@@ -1,95 +1,82 @@
 "use client"
 
-import React from "react"
-
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { Button } from "@/components/ui/button"
 import { MessageCircle } from "lucide-react"
-import { trackWhatsAppLead } from "@/lib/whatsapp"
+import { whatsappHref, trackWhatsAppLead } from "@/lib/whatsapp"
+import { siteConfig } from "@/lib/site-config"
 
+// FAQ enxuto de proposito: so as objecoes que travam o clique no WhatsApp.
+// Perguntas educativas (que nao destravam o agendamento) sairam daqui.
 const faqs = [
+  {
+    question: "Quanto custa?",
+    answer: `${siteConfig.offer.label}. São cerca de 90 minutos de avaliação, e só depois dela conseguimos estimar o número de sessões. Não trabalhamos com pacote fechado obrigatório.`,
+  },
   {
     question: "O tratamento dói?",
     answer:
-      "Nossos tratamentos são planejados para serem confortáveis e seguros. A quiropraxia instrumental utiliza força controlada e não requer movimentos bruscos. Algumas técnicas podem gerar leve desconforto pontual, mas sempre respeitamos seus limites e ajustamos conforme sua tolerância.",
+      "A quiropraxia instrumental usa força controlada, sem manobras bruscas. Pode haver um desconforto pontual, mas respeitamos o seu limite o tempo todo — é uma técnica indicada inclusive para quem tem medo ou nunca fez.",
   },
   {
     question: "Quantas sessões vou precisar?",
     answer:
-      "O número de sessões varia de acordo com cada caso. Algumas pessoas sentem melhora significativa em poucas semanas, enquanto quadros mais complexos podem precisar de acompanhamento mais longo. Após a avaliação inicial, apresentamos uma estimativa personalizada para o seu caso.",
+      "Depende do caso. Alguns pacientes sentem melhora em poucas semanas; quadros mais antigos costumam pedir acompanhamento mais longo. Você recebe uma estimativa personalizada logo após a avaliação.",
   },
   {
-    question: "A quiropraxia é segura?",
+    question: "Meu convênio cobre?",
     answer:
-      "Sim! Quando realizada por profissional qualificado, a quiropraxia é um tratamento seguro e respaldado cientificamente. Utilizamos a técnica instrumental, que oferece controle preciso da força aplicada, tornando-a ainda mais confortável e adequada para diferentes perfis de pacientes.",
-  },
-  {
-    question: "Meu convenio cobre o tratamento?",
-    answer:
-      "A Benevento Fisioterapia nao trabalha diretamente com convenios. Porem, alguns convenios oferecem reembolso ao apresentar a nota fiscal do servico prestado. Convenios como Porto Seguro, Sul America e Bradesco costumam fazer esse tipo de reembolso. Para saber se voce esta apto a receber o reembolso pelo seu convenio, entre em contato diretamente com sua operadora e verifique os procedimentos necessarios.",
+      "Não atendemos por convênio, mas emitimos nota fiscal para reembolso. Porto Seguro, SulAmérica e Bradesco costumam reembolsar — vale confirmar as regras com a sua operadora.",
   },
   {
     question: "Onde fica a clínica?",
     answer:
-      "Estamos localizados em Várzea Paulista, região de Jundiaí/SP. A clínica conta com estacionamento e fácil acesso. Entre em contato pelo WhatsApp que enviaremos a localização exata e orientações de como chegar.",
+      "Rua Antônio Feres Sada, 23 — Centro, Várzea Paulista, em frente à Estação de Trem. Tem estacionamento no local.",
   },
   {
-    question: "Posso fazer tratamento usando medicações?",
+    question: "Preciso levar exames?",
     answer:
-      "Sim! Muitos pacientes iniciam o tratamento enquanto fazem uso de medicamentos prescritos por seus médicos. À medida que o tratamento avança e a dor diminui, é comum que a necessidade de medicação reduza naturalmente. Sempre orientamos a manter diálogo com seu médico.",
-  },
-  {
-    question: "É necessário levar exames na primeira consulta?",
-    answer:
-      "Se você possui exames recentes (raio-X, ressonância, tomografia), traga! Eles ajudam a complementar a avaliação. Mas não são obrigatórios – nossa avaliação clínica já fornece informações valiosas para iniciar o tratamento.",
+      "Se tiver exames recentes (raio-X, ressonância, tomografia), traga — ajudam. Mas não são obrigatórios para começar.",
   },
 ]
 
-export function FAQSection() {
-  const whatsappNumber = "5511995625889"
-  const message = "Ola! Tenho uma duvida sobre o tratamento."
-  const whatsappHref = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
+const MESSAGE = "Ola! Tenho uma duvida sobre o tratamento."
 
+export function FAQSection() {
   return (
-    <section className="py-20 bg-white">
+    <section className="bg-white py-14 md:py-20">
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="font-serif text-3xl md:text-4xl font-bold text-center text-foreground mb-4 text-balance">
-            Perguntas Frequentes
+        <div className="mx-auto max-w-3xl">
+          <h2 className="mb-8 text-balance text-center font-serif text-2xl font-bold text-foreground md:text-4xl">
+            Perguntas frequentes
           </h2>
 
-          <p className="text-lg text-center text-muted-foreground mb-12 text-pretty">
-            Tire suas dúvidas sobre o tratamento
-          </p>
-
-          <Accordion type="single" collapsible className="w-full mb-12">
+          <Accordion type="single" collapsible className="mb-8 w-full">
             {faqs.map((faq, index) => (
-              <AccordionItem key={index} value={`item-${index}`}>
-                <AccordionTrigger className="text-left text-lg font-medium hover:text-primary">
+              <AccordionItem key={faq.question} value={`item-${index}`}>
+                <AccordionTrigger className="text-left text-base font-medium hover:text-primary md:text-lg">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground leading-relaxed text-pretty pt-2">
+                <AccordionContent className="text-pretty leading-relaxed text-muted-foreground">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>
 
-          <div className="bg-muted rounded-lg p-6 text-center">
-            <p className="text-muted-foreground mb-4 text-pretty">Ainda tem dúvidas? Estamos aqui para te ajudar!</p>
+          <div className="rounded-xl bg-muted p-6 text-center">
+            <p className="mb-4 text-pretty text-muted-foreground">Ficou alguma dúvida? Pergunte direto para a gente.</p>
 
-            <Button asChild className="bg-green-600 hover:bg-green-700 text-white font-semibold">
-              <a
-                href={whatsappHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                data-gtm="cta-whatsapp-faq"
-                onClick={trackWhatsAppLead}
-              >
-                <MessageCircle className="mr-2 h-4 w-4" />
-                Enviar Mensagem pelo WhatsApp
-              </a>
-            </Button>
+            <a
+              href={whatsappHref(MESSAGE)}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-gtm="cta-whatsapp-faq"
+              onClick={trackWhatsAppLead}
+              className="inline-flex h-14 w-full max-w-sm items-center justify-center gap-2 rounded-xl bg-green-600 px-8 text-base font-bold text-white shadow-lg transition-colors hover:bg-green-700"
+            >
+              <MessageCircle className="h-5 w-5 shrink-0" />
+              Tirar minha dúvida no WhatsApp
+            </a>
           </div>
         </div>
       </div>
