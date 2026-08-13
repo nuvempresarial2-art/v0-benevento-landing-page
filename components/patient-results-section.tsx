@@ -4,7 +4,7 @@ import { useRef, useState } from "react"
 import { ChevronLeft, ChevronRight, MessageCircle } from "lucide-react"
 import Image from "next/image"
 import { siteConfig } from "@/lib/site-config"
-import { whatsappHref, trackWhatsAppLead } from "@/lib/whatsapp"
+import { bridgeHref, trackWhatsAppLead } from "@/lib/whatsapp"
 
 interface PatientResult {
   id: number
@@ -170,7 +170,7 @@ export function PatientResultsSection() {
 
         <div className="mt-8 text-center">
           <a
-            href={whatsappHref("Ola! Vi os resultados no site e quero agendar uma avaliacao.")}
+            href={bridgeHref("Ola! Vi os resultados no site e quero agendar uma avaliacao.")}
             target="_blank"
             rel="noopener noreferrer"
             data-gtm="cta-whatsapp-contato"

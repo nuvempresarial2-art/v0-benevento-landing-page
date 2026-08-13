@@ -2,7 +2,7 @@
 
 import { MessageCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { whatsappHref, trackWhatsAppLead } from "@/lib/whatsapp"
+import { bridgeHref, trackWhatsAppLead } from "@/lib/whatsapp"
 import { cn } from "@/lib/utils"
 
 type Props = {
@@ -24,7 +24,7 @@ export function WhatsAppCtaButton({ message, label, gtm, size = "default", class
   return (
     <Button asChild size={size} className={cn("bg-green-600 hover:bg-green-700 text-white font-semibold", className)}>
       <a
-        href={whatsappHref(message)}
+        href={bridgeHref(message)}
         target="_blank"
         rel="noopener noreferrer"
         data-gtm={gtm}

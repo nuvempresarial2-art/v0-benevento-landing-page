@@ -2,7 +2,7 @@
 
 import { Facebook, Instagram, Phone } from "lucide-react"
 import Link from "next/link"
-import { whatsappHref, trackWhatsAppLead } from "@/lib/whatsapp"
+import { bridgeHref, trackWhatsAppLead } from "@/lib/whatsapp"
 
 // Links internos ficam so no rodape: preservam o SEO das paginas de tratamento
 // sem disputar atencao com o CTA no topo da pagina.
@@ -29,7 +29,7 @@ export function Footer() {
           </p>
 
           <a
-            href={whatsappHref("Ola! Vim pelo site e gostaria de agendar uma consulta.")}
+            href={bridgeHref("Ola! Vim pelo site e gostaria de agendar uma consulta.")}
             target="_blank"
             rel="noopener noreferrer"
             data-gtm="cta-whatsapp-footer-tel"

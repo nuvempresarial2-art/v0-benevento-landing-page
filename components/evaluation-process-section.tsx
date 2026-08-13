@@ -1,7 +1,7 @@
 "use client"
 
 import { Calendar, ClipboardCheck, HeartPulse, TrendingUp, MessageCircle } from "lucide-react"
-import { whatsappHref, trackWhatsAppLead } from "@/lib/whatsapp"
+import { bridgeHref, trackWhatsAppLead } from "@/lib/whatsapp"
 import { siteConfig } from "@/lib/site-config"
 
 const steps = [
@@ -70,7 +70,7 @@ export function EvaluationProcessSection() {
 
           <div className="text-center">
             <a
-              href={whatsappHref(MESSAGE)}
+              href={bridgeHref(MESSAGE)}
               target="_blank"
               rel="noopener noreferrer"
               data-gtm="cta-whatsapp-avaliacao-processo"

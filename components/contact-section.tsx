@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { MessageCircle, Phone, MapPin } from "lucide-react"
 import { useState } from "react"
-import { trackWhatsAppLead } from "@/lib/whatsapp"
+import { bridgeHref, trackWhatsAppLead } from "@/lib/whatsapp"
 
 export function ContactSection() {
   const [formData, setFormData] = useState({
@@ -16,20 +16,15 @@ export function ContactSection() {
     message: "",
   })
 
-  const whatsappNumber = "5511995625889"
-  const whatsappMessage = encodeURIComponent("Ola! Vim pelo site e gostaria de agendar uma consulta.")
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
-    const message = encodeURIComponent(
-      `Ola! Meu nome eh ${formData.name}.\n\nTelefone: ${formData.phone}\n\nMensagem: ${formData.message}`,
-    )
+    const message = `Ola! Meu nome eh ${formData.name}.\n\nTelefone: ${formData.phone}\n\nMensagem: ${formData.message}`
 
     trackWhatsAppLead()
 
-    const whatsappHref = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${message}`
-    window.open(whatsappHref, "_blank")
+    // Passa pela ponte /agendar para a conversao contar, igual aos demais CTAs.
+    window.open(bridgeHref(message), "_blank")
 
     setFormData({ name: "", phone: "", message: "" })
   }
@@ -62,7 +57,7 @@ export function ContactSection() {
               className="bg-green-600 hover:bg-green-700 text-white mb-8 font-semibold shadow-md"
             >
               <a
-                href={`https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${whatsappMessage}`}
+                href={bridgeHref("Ola! Vim pelo site e gostaria de agendar uma consulta.")}
                 target="_blank"
                 rel="noopener noreferrer"
                 data-gtm="cta-whatsapp-contato"

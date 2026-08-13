@@ -2,7 +2,7 @@
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { MessageCircle } from "lucide-react"
-import { whatsappHref, trackWhatsAppLead } from "@/lib/whatsapp"
+import { bridgeHref, trackWhatsAppLead } from "@/lib/whatsapp"
 import { siteConfig } from "@/lib/site-config"
 
 // FAQ enxuto de proposito: so as objecoes que travam o clique no WhatsApp.
@@ -67,7 +67,7 @@ export function FAQSection() {
             <p className="mb-4 text-pretty text-muted-foreground">Ficou alguma dúvida? Pergunte direto para a gente.</p>
 
             <a
-              href={whatsappHref(MESSAGE)}
+              href={bridgeHref(MESSAGE)}
               target="_blank"
               rel="noopener noreferrer"
               data-gtm="cta-whatsapp-faq"

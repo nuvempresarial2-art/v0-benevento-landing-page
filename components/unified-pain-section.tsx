@@ -1,7 +1,7 @@
 "use client"
 
 import { AlertCircle, Bed, Frown, Move, Pill, Activity, MessageCircle } from "lucide-react"
-import { whatsappHref, trackWhatsAppLead } from "@/lib/whatsapp"
+import { bridgeHref, trackWhatsAppLead } from "@/lib/whatsapp"
 
 // Frases curtas de proposito: a pessoa precisa se reconhecer numa batida de
 // olho, nao ler um paragrafo.
@@ -47,7 +47,7 @@ export function UnifiedPainSection() {
             </p>
 
             <a
-              href={whatsappHref(MESSAGE)}
+              href={bridgeHref(MESSAGE)}
               target="_blank"
               rel="noopener noreferrer"
               data-gtm="cta-whatsapp-avaliacao"

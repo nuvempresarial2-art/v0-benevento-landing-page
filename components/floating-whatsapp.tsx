@@ -1,7 +1,7 @@
 "use client"
 
 import { MessageCircle } from "lucide-react"
-import { whatsappHref, trackWhatsAppLead } from "@/lib/whatsapp"
+import { bridgeHref, trackWhatsAppLead } from "@/lib/whatsapp"
 
 const FAB_MESSAGE = "Ola! Vim pelo site e gostaria de agendar uma avaliacao para dor nas costas."
 
@@ -24,7 +24,7 @@ export function FloatingWhatsApp() {
         style={{ paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}
       >
         <a
-          href={whatsappHref(FAB_MESSAGE)}
+          href={bridgeHref(FAB_MESSAGE)}
           target="_blank"
           rel="noopener noreferrer"
           data-gtm="cta-whatsapp-flutuante"
@@ -38,7 +38,7 @@ export function FloatingWhatsApp() {
 
       {/* Desktop: pilula flutuante */}
       <a
-        href={whatsappHref(FAB_MESSAGE)}
+        href={bridgeHref(FAB_MESSAGE)}
         target="_blank"
         rel="noopener noreferrer"
         data-gtm="cta-whatsapp-flutuante"

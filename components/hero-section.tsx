@@ -2,7 +2,7 @@
 
 import { Moon, Activity, Pill, CheckCircle2, Clock, MessageCircle } from "lucide-react"
 import Image from "next/image"
-import { whatsappHref, trackWhatsAppLead } from "@/lib/whatsapp"
+import { bridgeHref, trackWhatsAppLead } from "@/lib/whatsapp"
 import { siteConfig } from "@/lib/site-config"
 
 const benefits = [
@@ -63,7 +63,7 @@ export function HeroSection() {
           {/* CTA unico e dominante. O secundario e um link discreto de proposito:
               dois botoes do mesmo peso dividem o clique. */}
           <a
-            href={whatsappHref(AGENDAR_MSG)}
+            href={bridgeHref(AGENDAR_MSG)}
             target="_blank"
             rel="noopener noreferrer"
             data-gtm="cta-whatsapp-agendar"
@@ -82,7 +82,7 @@ export function HeroSection() {
 
           <p className="mt-3">
             <a
-              href={whatsappHref(DUVIDA_MSG)}
+              href={bridgeHref(DUVIDA_MSG)}
               target="_blank"
               rel="noopener noreferrer"
               data-gtm="cta-whatsapp-duvida"

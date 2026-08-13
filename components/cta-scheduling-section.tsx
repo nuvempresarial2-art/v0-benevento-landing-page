@@ -2,7 +2,7 @@
 
 import { MessageCircle, CheckCircle2, Clock, MapPin, Phone, Navigation } from "lucide-react"
 import { MapEmbed } from "@/components/map-embed"
-import { whatsappHref, trackWhatsAppLead } from "@/lib/whatsapp"
+import { bridgeHref, trackWhatsAppLead } from "@/lib/whatsapp"
 import { siteConfig } from "@/lib/site-config"
 
 const MESSAGE = "Ola! Quero agendar minha avaliacao."
@@ -35,7 +35,7 @@ export function CTASchedulingSection() {
           </p>
 
           <a
-            href={whatsappHref(MESSAGE)}
+            href={bridgeHref(MESSAGE)}
             target="_blank"
             rel="noopener noreferrer"
             data-gtm="cta-whatsapp-footer"
@@ -73,7 +73,7 @@ export function CTASchedulingSection() {
                 </p>
                 <p className="text-muted-foreground">Em frente à Estação de Trem · estacionamento no local</p>
                 <a
-                  href={whatsappHref("Ola! Vim pelo site e gostaria de agendar uma consulta.")}
+                  href={bridgeHref("Ola! Vim pelo site e gostaria de agendar uma consulta.")}
                   target="_blank"
                   rel="noopener noreferrer"
                   data-gtm="cta-whatsapp-footer-tel"

@@ -3,7 +3,7 @@
 import { Card } from "@/components/ui/card"
 import Image from "next/image"
 import { MessageCircle, Hand, User, Brain, Flower } from "lucide-react"
-import { whatsappHref, trackWhatsAppLead } from "@/lib/whatsapp"
+import { bridgeHref, trackWhatsAppLead } from "@/lib/whatsapp"
 
 // As tecnicas viraram chips aqui (antes eram uma secao inteira). Mantem as
 // palavras-chave e o diferencial sem custar mais uma rolagem.
@@ -66,7 +66,7 @@ export function AboutSection() {
                 </blockquote>
 
                 <a
-                  href={whatsappHref(MESSAGE)}
+                  href={bridgeHref(MESSAGE)}
                   target="_blank"
                   rel="noopener noreferrer"
                   data-gtm="cta-whatsapp-avaliacao-sobre"
