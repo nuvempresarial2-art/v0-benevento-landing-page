@@ -32,7 +32,16 @@ export function bridgeHref(message: string): string {
 
 declare global {
   interface Window {
-    fbq?: ((...args: unknown[]) => void) & { loaded?: boolean }
+    fbq?: ((...args: unknown[]) => void) & {
+      /**
+       * Setado pelo snippet stub do layout de forma SINCRONA, antes de o
+       * fbevents.js comecar a baixar. Nao serve para saber se o pixel esta
+       * pronto — use `callMethod`.
+       */
+      loaded?: boolean
+      /** So existe depois que o fbevents.js real carrega e assume a fila. */
+      callMethod?: (...args: unknown[]) => void
+    }
     gtag?: (...args: unknown[]) => void
   }
 }

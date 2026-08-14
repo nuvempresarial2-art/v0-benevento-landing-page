@@ -39,8 +39,26 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <head>
-        {/* Facebook Pixel */}
-        <Script id="facebook-pixel" strategy="afterInteractive">
+        {/*
+          O beacon de conversao percorre dois hosts de terceiros: o script vem de
+          connect.facebook.net e o evento em si vai para www.facebook.com/tr.
+          Na pagina-ponte /agendar a aba e destruida poucas centenas de ms depois
+          do carregamento, entao pagar DNS + TLS ali dentro custa a conversao.
+          Abrir as duas conexoes desde o parse do HTML tira isso do caminho.
+        */}
+        <link rel="preconnect" href="https://connect.facebook.net" />
+        <link rel="preconnect" href="https://www.facebook.com" />
+
+        {/*
+          Facebook Pixel.
+
+          strategy="beforeInteractive" (e NAO afterInteractive) porque o snippet
+          precisa estar no HTML inicial: com afterInteractive o Next so injetava
+          a tag depois da hidratacao, entao na /agendar o fbevents.js comecava a
+          baixar tarde demais e o PageView morria no redirect. Esta estrategia so
+          funciona no layout raiz — mantenha o Script aqui.
+        */}
+        <Script id="facebook-pixel" strategy="beforeInteractive">
           {`
             !function(f,b,e,v,n,t,s)
             {if(f.fbq)return;n=f.fbq=function(){n.callMethod?

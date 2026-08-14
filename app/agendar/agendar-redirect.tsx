@@ -13,15 +13,31 @@ import { whatsappHref, trackGoogleAdsWhatsApp } from "@/lib/whatsapp"
  * contar. O redirect so pode acontecer depois que o beacon do PageView sair —
  * navegar antes disso mata o evento.
  *
- * Tanto o Pixel quanto o gtag sao carregados com strategy="afterInteractive",
- * ou seja, NENHUM dos dois existe necessariamente quando este efeito roda —
- * disparar de cara silenciaria a conversao do Google. Por isso ficamos em
- * polling ate cada um aparecer, com um teto para ninguem ficar preso aqui se
- * as tags forem bloqueadas por adblock.
+ * O gtag e carregado com strategy="afterInteractive", ou seja, nao existe
+ * necessariamente quando este efeito roda — disparar de cara silenciaria a
+ * conversao do Google. Por isso ficamos em polling ate cada sinal aparecer, com
+ * um teto para ninguem ficar preso aqui se as tags forem bloqueadas por adblock.
  */
 
-const ESPERA_APOS_TAGS_MS = 400
+/** Folga para o beacon do PageView sair depois que o fbevents assume a fila. */
+const ESPERA_APOS_TAGS_MS = 600
 const TETO_MS = 3000
+
+/**
+ * O fbevents.js ja assumiu a fila?
+ *
+ * NAO use fbq.loaded: quem seta `loaded = true` e o proprio snippet stub do
+ * layout, de forma sincrona, ANTES de o fbevents.js sequer comecar a baixar.
+ * Checar por ele fazia a ponte concluir que o pixel estava pronto quando o
+ * PageView ainda estava parado em fbq.queue — e o redirect matava o beacon.
+ *
+ * `callMethod` so passa a existir quando o fbevents.js real carrega e troca o
+ * stub (o stub apenas consulta: callMethod ? apply : queue.push). Esse e o
+ * unico sinal confiavel de que a fila esta sendo escoada.
+ */
+function pixelEscoandoFila(): boolean {
+  return typeof window.fbq === "function" && typeof window.fbq.callMethod === "function"
+}
 
 export function AgendarRedirect({ message }: { message: string }) {
   useEffect(() => {
@@ -45,14 +61,21 @@ export function AgendarRedirect({ message }: { message: string }) {
         googleDisparado = true
       }
 
-      // O PageView de /agendar e disparado pelo proprio snippet do layout;
-      // fbq.loaded === true significa que o fbevents ja esta escoando a fila.
-      const pixelPronto = typeof window.fbq === "function" && window.fbq.loaded === true
+      // O PageView de /agendar e disparado pelo proprio snippet do layout (nao
+      // reemitimos aqui: um segundo PageView contaria a conversao personalizada
+      // em dobro, porque o Meta so deduplica com eventID).
+      const pixelPronto = pixelEscoandoFila()
       const estourou = Date.now() - inicio > TETO_MS
       if (!(pixelPronto && googleDisparado) && !estourou) return
 
       window.clearInterval(timer)
-      window.setTimeout(ir, ESPERA_APOS_TAGS_MS)
+
+      // No estouro alguma tag esta bloqueada (adblock, rede caida) e a outra ja
+      // teve segundos de sobra para escoar: nao ha beacon novo para esperar.
+      // Vamos direto, para o teto ser 3s de verdade e a pessoa nao ficar presa.
+      // A folga so se aplica quando as duas ficaram prontas dentro do prazo.
+      if (estourou) ir()
+      else window.setTimeout(ir, ESPERA_APOS_TAGS_MS)
     }, 50)
 
     return () => window.clearInterval(timer)
