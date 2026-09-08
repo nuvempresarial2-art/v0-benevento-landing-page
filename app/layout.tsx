@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 export const viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#2D5F5D",
+  themeColor: "#104a50", // teal da logo (--brand)
 }
 
 export default function RootLayout({

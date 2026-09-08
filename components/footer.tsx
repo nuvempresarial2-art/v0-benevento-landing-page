@@ -74,7 +74,7 @@ export function Footer() {
           </div>
 
           <p className="mt-8 border-t border-accent-foreground/20 pt-5 text-xs text-accent-foreground/70">
-            © {currentYear} Benevento — Fisioterapia e Práticas Integrativas.
+            © {currentYear} Licemara Benevento — Fisioterapia Integrativa e Quiropraxia.
           </p>
         </div>
       </div>

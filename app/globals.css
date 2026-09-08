@@ -3,51 +3,66 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ============================================================================
+   PALETA DA MARCA — derivada da logo (teal profundo + branco).
+   A logo tem so duas cores: o teal do fundo e o branco da tipografia. Todo o
+   site foi reconstruido em cima disso, em tons do mesmo teal.
+
+   Consequencia proposital: o VERDE DO WHATSAPP virou a unica cor quente da
+   pagina. Como nada mais compete com ele, o olho vai direto para o botao —
+   e isso e exatamente o que se quer numa landing de trafego pago.
+
+   --brand e a cor exata do fundo da logo. Ela existe separada de --primary
+   porque o header precisa casar pixel a pixel com o arquivo da logo; se a
+   amostragem do arquivo final der outro hex, basta trocar aqui.
+   ========================================================================= */
 :root {
-  --background: oklch(0.99 0.005 85); /* Off-white quente */
-  --foreground: oklch(0.25 0.02 160); /* Verde escuro profundo */
+  --brand: oklch(0.38 0.058 202); /* teal do fundo da logo (~#104a50) */
+
+  --background: oklch(0.99 0.004 200); /* branco levemente esverdeado */
+  --foreground: oklch(0.24 0.03 200); /* teal quase preto (texto) */
 
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.25 0.02 160);
+  --card-foreground: oklch(0.24 0.03 200);
 
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.25 0.02 160);
+  --popover-foreground: oklch(0.24 0.03 200);
 
-  --primary: oklch(0.5 0.12 180); /* Verde-azulado (teal) do logotipo */
+  --primary: oklch(0.38 0.058 202); /* = --brand */
   --primary-foreground: oklch(0.99 0 0);
 
-  --secondary: oklch(0.75 0.06 25); /* Tom terroso rosado */
-  --secondary-foreground: oklch(0.25 0.02 160);
+  --secondary: oklch(0.62 0.068 197); /* teal medio: icones e sobreposicoes */
+  --secondary-foreground: oklch(0.99 0 0);
 
-  --muted: oklch(0.95 0.01 25); /* Rosado muito claro */
-  --muted-foreground: oklch(0.5 0.02 160);
+  --muted: oklch(0.96 0.009 200); /* teal quase branco (fundos de secao) */
+  --muted-foreground: oklch(0.47 0.025 200);
 
-  --accent: oklch(0.3 0.06 160); /* Verde escuro para botões */
+  --accent: oklch(0.28 0.045 203); /* teal mais escuro: rodape */
   --accent-foreground: oklch(0.99 0 0);
 
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.99 0 0);
 
-  --border: oklch(0.88 0.02 25);
-  --input: oklch(0.88 0.02 25);
-  --ring: oklch(0.5 0.12 180);
+  --border: oklch(0.9 0.014 200);
+  --input: oklch(0.9 0.014 200);
+  --ring: oklch(0.38 0.058 202);
 
-  --chart-1: oklch(0.5 0.12 180);
-  --chart-2: oklch(0.75 0.06 25);
-  --chart-3: oklch(0.3 0.06 160);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
+  --chart-1: oklch(0.38 0.058 202);
+  --chart-2: oklch(0.62 0.068 197);
+  --chart-3: oklch(0.28 0.045 203);
+  --chart-4: oklch(0.75 0.055 195);
+  --chart-5: oklch(0.5 0.065 200);
 
   --radius: 0.75rem;
 
   --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.25 0.02 160);
-  --sidebar-primary: oklch(0.5 0.12 180);
+  --sidebar-foreground: oklch(0.24 0.03 200);
+  --sidebar-primary: oklch(0.38 0.058 202);
   --sidebar-primary-foreground: oklch(0.99 0 0);
-  --sidebar-accent: oklch(0.95 0.01 25);
-  --sidebar-accent-foreground: oklch(0.25 0.02 160);
-  --sidebar-border: oklch(0.88 0.02 25);
-  --sidebar-ring: oklch(0.5 0.12 180);
+  --sidebar-accent: oklch(0.96 0.009 200);
+  --sidebar-accent-foreground: oklch(0.24 0.03 200);
+  --sidebar-border: oklch(0.9 0.014 200);
+  --sidebar-ring: oklch(0.38 0.058 202);
 }
 
 .dark {
@@ -57,13 +72,14 @@
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.145 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.5 0.12 180);
-  --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.269 0 0);
+  --brand: oklch(0.38 0.058 202);
+  --primary: oklch(0.62 0.068 197);
+  --primary-foreground: oklch(0.16 0.02 200);
+  --secondary: oklch(0.3 0.03 200);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
   --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.3 0.06 160);
+  --accent: oklch(0.28 0.045 203);
   --accent-foreground: oklch(0.99 0 0);
   --destructive: oklch(0.396 0.141 25.723);
   --destructive-foreground: oklch(0.637 0.237 25.331);
@@ -90,6 +106,7 @@
   --font-sans: system-ui, -apple-system, sans-serif;
   --font-serif: Georgia, "Times New Roman", serif;
   --font-mono: "Courier New", monospace;
+  --color-brand: var(--brand);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -134,5 +151,28 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* Animacao de entrada do painel do seletor de casos (secao do equipamento).
+   Fica aqui porque o tw-animate-css foi removido do projeto. */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.28s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up {
+    animation: none;
   }
 }

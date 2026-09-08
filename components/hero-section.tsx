@@ -22,13 +22,13 @@ const DUVIDA_MSG = "Ola! Tenho uma duvida sobre o tratamento."
  * que nao vai para o WhatsApp e um lead pago perdido.
  */
 export function HeroSection() {
-  const badgeText = siteConfig.offer.showPriceInHeroBadge ? siteConfig.offer.label : siteConfig.offer.heroBadge
+  const badgeText = siteConfig.offer.heroBadge
 
   return (
     <section id="home" className="relative flex items-center">
       <div className="absolute inset-0">
         <Image src="/images/hero.webp" alt="" fill priority sizes="100vw" className="object-cover object-center" />
-        <div className="absolute inset-0 bg-secondary/80" />
+        <div className="absolute inset-0 bg-brand/85" />
       </div>
 
       <div className="container relative z-10 mx-auto px-4 py-10 md:py-20 lg:px-8">
@@ -74,9 +74,9 @@ export function HeroSection() {
             Agendar minha avaliação
           </a>
 
-          {siteConfig.offer.enabled && !siteConfig.offer.showPriceInHeroBadge && (
+          {siteConfig.offer.enabled && (
             <p className="mx-auto mt-3 max-w-[42ch] text-sm text-white/85">
-              {siteConfig.offer.label} · avaliação de cerca de 90 minutos, sem pacote fechado.
+              {siteConfig.offer.label} · sem pacote fechado e sem compromisso.
             </p>
           )}
 

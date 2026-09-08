@@ -4,19 +4,34 @@
 // ============================================================================
 
 export const siteConfig = {
+  // --- MARCA / LOGO --------------------------------------------------------
+  brand: {
+    logo: {
+      src: "/images/benevento-20-20logo-20final.avif",
+      alt: "Licemara Benevento — Fisioterapia Integrativa e Quiropraxia",
+
+      /**
+       * true quando o arquivo da logo JA TEM o fundo teal embutido (a versao
+       * nova, branca sobre teal). Nesse caso o header inteiro fica na cor
+       * --brand para o retangulo da imagem sumir dentro da barra.
+       *
+       * false quando a logo e teal sobre fundo transparente (versao antiga):
+       * o header fica branco, senao a marca desaparece no fundo.
+       */
+      hasSolidBackground: false,
+    },
+  },
+
   // --- OFERTA (perto dos CTAs) ---------------------------------------------
+  // Sem valores: preco e negociado na conversa do WhatsApp, nao na pagina.
+  // O que a pessoa ganha ao clicar continua explicito — o que some e so o
+  // numero, que na landing filtrava clique antes da conversa comecar.
   offer: {
     enabled: true,
-    label: "Avaliação inicial: R$ 260 no PIX",
-    subtext: "Cerca de 90 min: histórico, testes posturais e um plano feito para você.",
+    label: "Avaliação inicial completa — cerca de 90 minutos",
+    subtext: "Histórico, testes posturais e um plano de tratamento feito para o seu caso.",
 
-    // [TESTE A/B] Preco no TOPO do hero (primeira coisa que a pessoa ve).
-    // false = o preco aparece so ABAIXO do botao, como transparencia.
-    // Em trafego pago frio, preco no topo costuma filtrar cliques; deixe false
-    // para volume de leads, true para leads mais qualificados.
-    showPriceInHeroBadge: false,
-
-    // Badge do topo quando showPriceInHeroBadge = false.
+    // Badge do topo do hero.
     heroBadge: "Especialista em dor de coluna há mais de 15 anos",
   },
 
