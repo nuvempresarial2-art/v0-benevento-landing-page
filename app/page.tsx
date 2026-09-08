@@ -1,6 +1,7 @@
 import { Header } from "@/components/header"
 import { HeroSection } from "@/components/hero-section"
 import { TrustBar } from "@/components/trust-bar"
+import { EquipmentSection } from "@/components/equipment-section"
 import { PatientResultsSection } from "@/components/patient-results-section"
 import { UnifiedPainSection } from "@/components/unified-pain-section"
 import { EvaluationProcessSection } from "@/components/evaluation-process-section"
@@ -11,8 +12,14 @@ import { Footer } from "@/components/footer"
 
 /**
  * Landing de trafego pago — sequencia deliberada:
- * oferta -> prova -> reconhecimento do problema -> como funciona ->
- * quem atende -> objecoes -> fechamento.
+ * oferta -> equipamento do anuncio -> prova -> reconhecimento do problema ->
+ * como funciona -> quem atende -> objecoes -> fechamento.
+ *
+ * A EquipmentSection vem logo apos a TrustBar de proposito: quem clica no
+ * anuncio da maca de flexo distracao precisa reconhecer o equipamento na
+ * primeira rolagem, senao a promessa do criativo nao se cumpre e a pessoa sai.
+ * Ela tem id="equipamento", entao o anuncio pode apontar direto para
+ * /#equipamento.
  *
  * O pb-24 no mobile reserva espaco para a barra fixa de WhatsApp.
  *
@@ -28,6 +35,7 @@ export default function Home() {
       <Header />
       <HeroSection />
       <TrustBar />
+      <EquipmentSection />
       <PatientResultsSection />
       <UnifiedPainSection />
       <EvaluationProcessSection />
