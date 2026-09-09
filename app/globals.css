@@ -17,7 +17,7 @@
    amostragem do arquivo final der outro hex, basta trocar aqui.
    ========================================================================= */
 :root {
-  --brand: oklch(0.38 0.058 202); /* teal do fundo da logo (~#104a50) */
+  --brand: #054851; /* teal do fundo da logo — amostrado do arquivo */
 
   --background: oklch(0.99 0.004 200); /* branco levemente esverdeado */
   --foreground: oklch(0.24 0.03 200); /* teal quase preto (texto) */
@@ -28,7 +28,7 @@
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.24 0.03 200);
 
-  --primary: oklch(0.38 0.058 202); /* = --brand */
+  --primary: oklch(0.38 0.058 202); /* teal da paleta (ver nota de --brand) */
   --primary-foreground: oklch(0.99 0 0);
 
   --secondary: oklch(0.62 0.068 197); /* teal medio: icones e sobreposicoes */
@@ -72,7 +72,7 @@
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.145 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --brand: oklch(0.38 0.058 202);
+  --brand: #054851;
   --primary: oklch(0.62 0.068 197);
   --primary-foreground: oklch(0.16 0.02 200);
   --secondary: oklch(0.3 0.03 200);

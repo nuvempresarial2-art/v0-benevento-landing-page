@@ -29,7 +29,7 @@ export function AboutSection() {
             <div className="grid items-center gap-8 md:grid-cols-[2fr_3fr]">
               <div className="relative mx-auto aspect-square w-48 overflow-hidden rounded-xl shadow-md md:w-full">
                 <Image
-                  src="/images/imagem-20do-20whatsapp-20de-202025-02-26-20a-cc-80-28s-29-2016-45-52-5968361b.avif"
+                  src="/images/licemara-benevento.webp"
                   alt="Dra. Licemara Benevento"
                   fill
                   sizes="(max-width: 768px) 192px, 40vw"

@@ -7,7 +7,7 @@ export const siteConfig = {
   // --- MARCA / LOGO --------------------------------------------------------
   brand: {
     logo: {
-      src: "/images/benevento-20-20logo-20final.avif",
+      src: "/images/logo-benevento.webp",
       alt: "Licemara Benevento — Fisioterapia Integrativa e Quiropraxia",
 
       /**
@@ -18,7 +18,7 @@ export const siteConfig = {
        * false quando a logo e teal sobre fundo transparente (versao antiga):
        * o header fica branco, senao a marca desaparece no fundo.
        */
-      hasSolidBackground: false,
+      hasSolidBackground: true,
     },
   },
 

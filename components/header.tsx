@@ -35,7 +35,7 @@ export function Header() {
               src={logo.src}
               alt={logo.alt}
               width={220}
-              height={80}
+              height={72}
               className="h-11 w-auto md:h-14"
               priority
             />
