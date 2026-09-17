@@ -1,16 +1,49 @@
 "use client"
 
+import type { ReactNode } from "react"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { MessageCircle } from "lucide-react"
 import { bridgeHref, trackWhatsAppLead } from "@/lib/whatsapp"
 import { siteConfig } from "@/lib/site-config"
 
+const { pricing } = siteConfig
+
+/**
+ * "Quanto custa?" e a pergunta de quem ja decidiu e so falta o numero — por
+ * isso o valor da avaliacao fica aqui, e nao perto dos botoes. Com
+ * pricing.enabled = false volta a resposta sem valores.
+ */
+const priceAnswer: ReactNode = pricing.enabled ? (
+  <div className="space-y-3">
+    <p>
+      A avaliação inicial custa{" "}
+      <strong className="text-foreground">
+        {pricing.evaluation.map((price) => `${price.value} ${price.payment}`).join(" ou ")}
+      </strong>{" "}
+      e dura cerca de 90 minutos: histórico, testes posturais e um plano feito para o seu caso.
+    </p>
+    <p>
+      Para ter uma referência: uma cirurgia de coluna particular costuma custar {pricing.surgery.value}. O
+      tratamento com a maca de flexo-distração não chega a {pricing.treatment.percentOfSurgery}% desse valor.
+    </p>
+    <p>
+      E o atendimento é integrativo: não é só a maca. Conforme o seu caso, ela entra junto com quiropraxia
+      instrumental, RPG/RPM, somato análise, terapia floral e auriculoterapia.
+    </p>
+    <p>
+      O número de sessões é estimado depois da avaliação. Não trabalhamos com pacote fechado obrigatório.
+    </p>
+  </div>
+) : (
+  `${siteConfig.offer.label}. Só depois da avaliação conseguimos estimar o número de sessões. Não trabalhamos com pacote fechado obrigatório.`
+)
+
 // FAQ enxuto de proposito: so as objecoes que travam o clique no WhatsApp.
 // Perguntas educativas (que nao destravam o agendamento) sairam daqui.
-const faqs = [
+const faqs: { question: string; answer: ReactNode }[] = [
   {
     question: "Quanto custa?",
-    answer: `${siteConfig.offer.label}. São cerca de 90 minutos de avaliação, e só depois dela conseguimos estimar o número de sessões. Não trabalhamos com pacote fechado obrigatório.`,
+    answer: priceAnswer,
   },
   {
     question: "O tratamento dói?",

@@ -7,7 +7,8 @@ import { bridgeHref, trackWhatsAppLead } from "@/lib/whatsapp"
 
 // As tecnicas viraram chips aqui (antes eram uma secao inteira). Mantem as
 // palavras-chave e o diferencial sem custar mais uma rolagem.
-const techniques = [
+// Exportado: o comparativo de valores repete os chips no bloco "nao e so a maca".
+export const techniques = [
   { icon: Hand, name: "Quiropraxia instrumental" },
   { icon: User, name: "RPG / RPM" },
   { icon: Brain, name: "Somato Análise" },

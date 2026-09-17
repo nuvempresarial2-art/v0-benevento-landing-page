@@ -23,9 +23,9 @@ export const siteConfig = {
   },
 
   // --- OFERTA (perto dos CTAs) ---------------------------------------------
-  // Sem valores: preco e negociado na conversa do WhatsApp, nao na pagina.
-  // O que a pessoa ganha ao clicar continua explicito — o que some e so o
-  // numero, que na landing filtrava clique antes da conversa comecar.
+  // Sem valores perto dos botoes: ali o numero filtrava clique antes da
+  // conversa comecar. O preco aparece so onde a pessoa foi procurar por ele —
+  // no FAQ e no comparativo com a cirurgia (ver `pricing` abaixo).
   offer: {
     enabled: true,
     label: "Avaliação inicial completa — cerca de 90 minutos",
@@ -33,6 +33,32 @@ export const siteConfig = {
 
     // Badge do topo do hero.
     heroBadge: "Especialista em dor de coluna há mais de 15 anos",
+  },
+
+  // --- VALORES (FAQ "Quanto custa?" + secao de comparativo) ----------------
+  // Preco e comparacao com cirurgia sao sensiveis na publicidade de
+  // fisioterapia, assim como as fotos de antes/depois. Defina false para tirar
+  // os valores do FAQ e a secao de comparativo inteira.
+  pricing: {
+    enabled: true,
+
+    // Um item por forma de pagamento. Para acrescentar (ex.: cartao), e so
+    // incluir outro item — o FAQ junta com "ou": "R$ 260 no PIX ou ...".
+    evaluation: [{ value: "R$ 260", payment: "no PIX" }],
+
+    // Referencia de mercado para o comparativo: cirurgia de coluna particular.
+    surgery: {
+      label: "Cirurgia de coluna (particular)",
+      value: "R$ 30 a 35 mil",
+    },
+
+    // Tratamento com a maca de flexo-distracao. `percentOfSurgery` controla a
+    // largura da barra no grafico — mantenha coerente com o texto.
+    treatment: {
+      label: "Tratamento com a maca de flexo-distração",
+      value: "Menos de 5% disso",
+      percentOfSurgery: 5,
+    },
   },
 
   // --- URGENCIA (honesta e editavel — sem afirmacoes falsas) ---------------
