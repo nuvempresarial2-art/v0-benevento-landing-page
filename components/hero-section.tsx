@@ -40,12 +40,16 @@ export function HeroSection() {
             </span>
           )}
 
+          {/* O anuncio que traz o trafego pago e o da maca: o H1 precisa confirmar
+              em um segundo que a pessoa chegou no lugar certo. "Dor na coluna" e
+              "Varzea Paulista" ficam no titulo por causa da busca do Google. */}
           <h1 className="mb-3 text-balance font-serif text-3xl font-bold text-white md:text-5xl">
-            Alívio para Dor nas Costas e Coluna em Várzea Paulista
+            Dor na coluna ou hérnia de disco? Tratamento sem cirurgia em Várzea Paulista
           </h1>
 
           <p className="mx-auto mb-5 max-w-[46ch] text-pretty text-base leading-relaxed text-white/95 md:text-xl">
-            Fisioterapia integrativa com quiropraxia e RPG, feita sob medida para o seu caso.
+            Fisioterapia integrativa com a nova maca de flexo-distração, quiropraxia e RPG — feita sob medida para o
+            seu caso.
           </p>
 
           <div className="mb-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2">

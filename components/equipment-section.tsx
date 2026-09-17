@@ -89,7 +89,7 @@ const conditions: Condition[] = [
       "Recurso conservador: sem corte, sem agulha e sem afastamento.",
       "Procurada inclusive por quem já ouviu falar em cirurgia e quer tentar antes uma via não invasiva.",
     ],
-    message: "Ola! Vi a maca de flexo distracao 500Z no site. Tenho hernia ou protrusao de disco e quero saber se serve para o meu caso.",
+    message: "Ola! Tenho hernia de disco. A maca de flexo distracao serve para mim?",
   },
   {
     id: "lombalgia",
@@ -101,7 +101,7 @@ const conditions: Condition[] = [
       "A intensidade acompanha o que o seu corpo aceita naquele dia.",
       "Combina com o restante do tratamento: quiropraxia, RPG e terapia manual.",
     ],
-    message: "Ola! Vi a maca de flexo distracao 500Z no site. Tenho dor lombar e quero saber se serve para o meu caso.",
+    message: "Ola! Tenho dor lombar. A maca de flexo distracao serve para mim?",
   },
   {
     id: "ciatica",
@@ -113,7 +113,7 @@ const conditions: Condition[] = [
       "O ajuste é feito no segmento que está gerando o sintoma.",
       "A avaliação identifica de onde vem a dor antes de qualquer sessão.",
     ],
-    message: "Ola! Vi a maca de flexo distracao 500Z no site. Tenho dor ciatica ou formigamento na perna e quero saber se serve para o meu caso.",
+    message: "Ola! Tenho dor ciatica. A maca de flexo distracao serve para mim?",
   },
   {
     id: "mobilidade",
@@ -125,7 +125,7 @@ const conditions: Condition[] = [
       "Indicada para quem sente rigidez ao levantar da cama ou do carro.",
       "Ganho de amplitude trabalhado sessão a sessão, sem forçar.",
     ],
-    message: "Ola! Vi a maca de flexo distracao 500Z no site. Minha coluna vive travada e quero saber se serve para o meu caso.",
+    message: "Ola! Minha coluna vive travada. A maca de flexo distracao serve para mim?",
   },
   {
     id: "mecanica",
@@ -137,7 +137,7 @@ const conditions: Condition[] = [
       "Os parâmetros são definidos a partir dos seus testes de movimento.",
       "O plano é revisto conforme a sua coluna responde.",
     ],
-    message: "Ola! Vi a maca de flexo distracao 500Z no site. Tenho uma alteracao na coluna e quero saber se serve para o meu caso.",
+    message: "Ola! Tenho uma alteracao na coluna. A maca de flexo distracao serve para mim?",
   },
 ]
 
@@ -182,7 +182,7 @@ function SpineDiagram({ decompressed }: { decompressed: boolean }) {
   )
 }
 
-const CTA_MESSAGE = "Ola! Vi a maca de flexo distracao 500Z no site e quero agendar uma avaliacao."
+const CTA_MESSAGE = "Ola! Vi a maca no site e quero agendar uma avaliacao."
 
 export function EquipmentSection() {
   const [decompressed, setDecompressed] = useState(false)

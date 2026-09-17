@@ -61,6 +61,15 @@ export const siteConfig = {
     },
   },
 
+  // --- ANALISE DE COMPORTAMENTO (Microsoft Clarity) ------------------------
+  // Gravacao de sessoes e mapa de rolagem: mostra ate onde as pessoas descem,
+  // se chegam a ver um botao e onde desistem. Gratuito.
+  // Pegue o ID em clarity.microsoft.com > seu projeto > Settings > Overview
+  // (algo como "abc123xyz9"). Vazio = Clarity desligado.
+  analytics: {
+    clarityProjectId: "",
+  },
+
   // --- URGENCIA (honesta e editavel — sem afirmacoes falsas) ---------------
   urgency: {
     enabled: true,

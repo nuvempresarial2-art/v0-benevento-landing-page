@@ -9,8 +9,7 @@ const surgeryPoints = ["Corte, anestesia e internação", "Semanas de recuperaç
 
 const treatmentPoints = ["Sem corte, sem agulha e sem internação", "Sessões no consultório, sem sair da rotina"]
 
-const MESSAGE =
-  "Ola! Vi no site a comparacao com a cirurgia e quero saber se a maca de flexo distracao serve para o meu caso."
+const MESSAGE = "Ola! Vi os valores no site. A maca de flexo distracao serve para mim?"
 
 /**
  * Comparativo de valor: cirurgia de coluna x tratamento com a maca.

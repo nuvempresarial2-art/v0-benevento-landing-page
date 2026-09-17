@@ -43,6 +43,8 @@ declare global {
       callMethod?: (...args: unknown[]) => void
     }
     gtag?: (...args: unknown[]) => void
+    /** Microsoft Clarity — so existe quando o ID esta configurado (components/clarity.tsx). */
+    clarity?: (...args: unknown[]) => void
   }
 }
 
@@ -58,13 +60,24 @@ declare global {
  *   terminam de disparar: Facebook Pixel (aqui), GTM (gatilho de clique nos
  *   atributos data-gtm) e a conversao do Google Ads acionada pelo GTM.
  * - NAO adicionamos dataLayer.push aqui para nao duplicar a contagem do GTM.
+ * - O Clarity recebe so uma marcacao na gravacao ("clique_whatsapp" + qual
+ *   botao, lido do data-gtm), para filtrar quem clicou de quem desistiu. Nao e
+ *   evento do Meta, entao nao conta conversao nem entra na blocklist do pixel.
  */
-export function trackWhatsAppLead(): void {
-  if (typeof window !== "undefined" && window.fbq) {
+export function trackWhatsAppLead(event?: { currentTarget: HTMLElement }): void {
+  if (typeof window === "undefined") return
+
+  if (window.fbq) {
     window.fbq("track", "Lead", {
       content_name: "WhatsApp Click",
       content_category: "Contact",
     })
+  }
+
+  if (typeof window.clarity === "function") {
+    window.clarity("event", "clique_whatsapp")
+    const cta = event?.currentTarget.dataset.gtm
+    if (cta) window.clarity("set", "cta_whatsapp", cta)
   }
 }
 
