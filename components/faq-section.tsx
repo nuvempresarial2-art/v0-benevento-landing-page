@@ -16,11 +16,14 @@ const { pricing } = siteConfig
 const priceAnswer: ReactNode = pricing.enabled ? (
   <div className="space-y-3">
     <p>
-      A avaliação inicial custa{" "}
-      <strong className="text-foreground">
-        {pricing.evaluation.map((price) => `${price.value} ${price.payment}`).join(" ou ")}
-      </strong>{" "}
-      e dura cerca de 90 minutos: histórico, testes posturais e um plano feito para o seu caso.
+      {pricing.evaluation.label} custa{" "}
+      <strong className="text-foreground">{pricing.evaluation.value}</strong> ({pricing.evaluation.cashValue} no
+      dinheiro ou PIX) e dura cerca de 90 minutos: histórico, testes posturais, um plano feito para o seu caso e
+      o primeiro tratamento.
+    </p>
+    <p>
+      Depois, {pricing.session.label} custa <strong className="text-foreground">{pricing.session.value}</strong>{" "}
+      ({pricing.session.cashValue} no dinheiro ou PIX).
     </p>
     <p>
       Para ter uma referência: uma cirurgia de coluna particular costuma custar {pricing.surgery.value}. O

@@ -42,9 +42,18 @@ export const siteConfig = {
   pricing: {
     enabled: true,
 
-    // Um item por forma de pagamento. Para acrescentar (ex.: cartao), e so
-    // incluir outro item — o FAQ junta com "ou": "R$ 260 no PIX ou ...".
-    evaluation: [{ value: "R$ 260", payment: "no PIX" }],
+    // `value` e o preco cheio; `cashValue` e o preco no dinheiro ou PIX.
+    // O FAQ mostra: "R$ 350 (R$ 300 no dinheiro ou PIX)".
+    evaluation: {
+      label: "A avaliação inicial + primeiro atendimento",
+      value: "R$ 350",
+      cashValue: "R$ 300",
+    },
+    session: {
+      label: "a sessão avulsa",
+      value: "R$ 290",
+      cashValue: "R$ 270",
+    },
 
     // Referencia de mercado para o comparativo: cirurgia de coluna particular.
     surgery: {
